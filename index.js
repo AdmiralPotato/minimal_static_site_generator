@@ -1,12 +1,15 @@
 import {
   mkdir,
   writeFile,
+  readFile,
+  readdir,
   rm,
 } from 'node:fs/promises';
 import { join, dirname } from 'node:path'
 import markdownit from 'markdown-it'
 
 const outputDir = 'dist';
+const inputDir = 'content';
 
 const md = markdownit();
 
@@ -48,25 +51,53 @@ const createPage = async (config) => {
 
 await rm(outputDir, { force: true, recursive: true });
 
-[
-  {
-    title: 'Home',
-    content: '# 801Labs.org Home\n\nThis is where the cool goats go',
-    path: 'index.html'
-  },
-  {
-    title: 'Contact',
-    content: '# Contact Us!\n\nCome hang out with us on Discord, or at our physical hackerspace!',
-    path: 'contact/index.html'
-  },
-  {
-    title: 'Contact GoataClause',
-    content: '# Contact GoataClause!\n\nCome get licked by your favorite yule-goat!',
-    path: 'contact/goataclause/index.html'
-  },
-  {
-    title: 'Donate',
-    content: '# Please pay our rent!\n\nYou can even donate in GoatCoin! _Goats do have coins, right?_',
-    path: 'donate/index.html'
-  },
-].forEach(createPage)
+const parseFrontMatter = (frontMatterString) => {
+  const result = {};
+  const lines = frontMatterString.split('\n');
+  lines.forEach((line) => {
+    const keyValueRegex = /^(.*?): (.*)/mg;
+    const regexResult = keyValueRegex.exec(line.trim());
+    // console.log('What is regexResult?', regexResult);
+    if (!regexResult) {
+      return;
+    }
+    const [_wholeMatch, key, value] = regexResult;
+    result[key.trim()] = value.trim();
+  })
+  return result;
+}
+
+const discoverPages = async (scanPath) => {
+  // get list files in current folder
+  // if filename ends in .md, add it to the pages array
+  const scanResult = await readdir(scanPath, {
+    recursive: true,
+  });
+  const markdownPaths = scanResult.filter(
+    (item) => item.endsWith('.md')
+  );
+  // console.log('What is markdownPaths?', markdownPaths);
+  return Promise.all(markdownPaths.map(async (path) => {
+    const inputPath = join(scanPath, path);
+    const content = await readFile(inputPath, {encoding: 'utf8'});
+    // console.log('What is content?', content);
+    const frontMatterRegex = /^---\n(.*?)\n---\n/s;
+    const regexResult = frontMatterRegex.exec(content);
+    // console.log('What is regexResult?', regexResult);
+    if (!regexResult) {
+      throw new Error(`Your markdown needs frontMatter!\nFile: "${inputPath}"`);
+    }
+    const [remove, frontMatterString] = regexResult;
+    const contentWithoutFrontMatter = content.replace(remove, '');
+    const frontMatter = parseFrontMatter(frontMatterString);
+    // console.log('What is frontMatter?', frontMatter);
+    return {
+      path: path.replace(/.md$/, '.html'),
+      title: frontMatter.title,
+      content: contentWithoutFrontMatter,
+    };
+  }));
+};
+
+const pages = await discoverPages(inputDir)
+pages.forEach(createPage)
