@@ -5,7 +5,7 @@ import {
   readdir,
   rm,
 } from 'node:fs/promises';
-import { join, dirname } from 'node:path'
+import { join, sep, dirname } from 'node:path'
 import markdownit from 'markdown-it'
 
 const outputDir = 'dist';
@@ -13,19 +13,20 @@ const inputDir = 'content';
 
 const md = markdownit();
 
-const pageTemplate = (title, content) => `
+const pageTemplate = (title, content, basePath) => `
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <title>801Labs.org: ${title}</title>
+    <link rel="stylesheet" type="text/css" href="${basePath}/styles.css" />
   </head>
 <body>
 <header>
 <h2>801Labs.org!!!!!!</h2>
 <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/contact/">Contact</a></li>
-    <li><a href="/donate/">Donate</a></li>
+    <li><a href="${basePath}/">Home</a></li>
+    <li><a href="${basePath}/contact/">Contact</a></li>
+    <li><a href="${basePath}/donate/">Donate</a></li>
 </ul>
 </header>
 ${content}
@@ -42,14 +43,20 @@ const createPage = async (config) => {
       recursive: true,
     },
   )
+  const depth = config.path.split(sep).length - 1;
+  const basePath = depth === 0 ? '.' : new Array(depth).fill('..').join('/');
+  // TODO: Specify which page template to render this markdown with
   const output = pageTemplate(
     config.title,
     md.render(config.content),
+    basePath
   );
   writeFile(prefixedPath, output);
 };
 
 await rm(outputDir, { force: true, recursive: true });
+// TODO: Copy the content folder over to the dist folder
+// TODO: Remove all the markdown files from the new dist folder
 
 const parseFrontMatter = (frontMatterString) => {
   const result = {};

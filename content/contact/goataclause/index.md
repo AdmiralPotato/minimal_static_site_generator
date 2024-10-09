@@ -9,6 +9,8 @@ licks_per_day: 7
 
 # Contact GoataClause!
 
+![A Goat wearing a Santa Hat](goataclause.webp)
+
 Come get licked by your favorite yule-goat!
 
 ----
