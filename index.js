@@ -4,6 +4,7 @@ import {
   readFile,
   readdir,
   rm,
+  cp,
 } from 'node:fs/promises';
 import { join, sep, dirname } from 'node:path'
 import markdownit from 'markdown-it'
@@ -35,7 +36,7 @@ const templateMap = {
 ${content}
 </body>
 </html>
-`
+`.trim();
   },
   contact: (config) => templateMap.basic({
     ...config,
@@ -81,8 +82,12 @@ const createPage = async (config) => {
 };
 
 await rm(outputDir, { force: true, recursive: true });
-// TODO: Copy the content folder over to the dist folder
-// TODO: Remove all the markdown files from the new dist folder
+await cp(inputDir, outputDir, {
+  recursive: true,
+  filter (source, _destination) {
+    return !source.endsWith('.md');
+  }
+});
 
 const parseFrontMatter = (frontMatterString) => {
   const result = {};
