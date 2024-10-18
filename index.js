@@ -6,51 +6,32 @@ import {
   rm,
   cp,
 } from 'node:fs/promises';
-import { join, sep, dirname } from 'node:path'
-import markdownit from 'markdown-it'
+import { join, sep, dirname } from 'node:path';
+import markdownit from 'markdown-it';
 
 const outputDir = 'dist';
 const inputDir = 'content';
+const templateDir = 'templates';
 
 const md = markdownit();
 
-const templateMap = {
-  basic: (config) => {
-    const { title, content, basePath } = config;
-    return `
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>801Labs.org: ${title}</title>
-    <link rel="stylesheet" type="text/css" href="${basePath}/styles.css" />
-  </head>
-<body>
-<header>
-<h2>801Labs.org!!!!!!</h2>
-<ul>
-    <li><a href="${basePath}/">Home</a></li>
-    <li><a href="${basePath}/contact/">Contact</a></li>
-    <li><a href="${basePath}/donate/">Donate</a></li>
-</ul>
-</header>
-${content}
-</body>
-</html>
-`.trim();
-  },
-  contact: (config) => templateMap.basic({
-    ...config,
-    content: `
-<div>
-  <h2>This is the Discord part</h2>
-</div>
-<div>
-  <h2>This is the Groogle Maps part</h2>
-</div>
-<div>${config.content}</div>
-`
-  }),
-};
+const templateFilenames = await readdir(templateDir, { recursive: true });
+const templateFunctions = await Promise.all(
+  templateFilenames
+    .filter((item) => item.endsWith('.js'))
+    .map(async (item) => {
+      // today I learned that ESM flavored imports only like url flavored paths,
+      // not paths that would include the windows \ path join
+      const modulePath = ['.', templateDir, item].join('/');
+      const module = await import(modulePath);
+      const templateFunction = (module).default;
+      return [item.replace('.js', ''), templateFunction];
+    })
+);
+const templateMap = templateFunctions.reduce((acc, [key, value]) => {
+  acc[key] = value;
+  return acc;
+}, {});
 
 const createPage = async (config) => {
   const templateName = config.template || 'basic';
@@ -68,16 +49,12 @@ const createPage = async (config) => {
   );
   const depth = config.path.split(sep).length - 1;
   const basePath = depth === 0 ? '.' : new Array(depth).fill('..').join('/');
-  // TODO: Specify which page template to render this markdown with
-  // - [x] Specify WHICH template with a frontMatter variable named `template`
-  // - [ ] Look on the filesystem in a folder called `templates` for that template
-  // - [ ] Load and parse that template, keep it cached by its name/primary key
-  // - [ ] Allow one template to reference/embed itself within another template
-  const output = pageTemplate({
+  const templateConfig = {
     ...config,
     content: md.render(config.content),
     basePath,
-  });
+  };
+  const output = pageTemplate(templateConfig, templateMap);
   writeFile(prefixedPath, output);
 };
 
@@ -138,5 +115,5 @@ const discoverPages = async (scanPath) => {
   }));
 };
 
-const pages = await discoverPages(inputDir)
-pages.forEach(createPage)
+const pages = await discoverPages(inputDir);
+pages.forEach(createPage);
