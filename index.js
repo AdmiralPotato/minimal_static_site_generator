@@ -13,7 +13,10 @@ const inputDir = 'content';
 
 const md = markdownit();
 
-const pageTemplate = (title, content, basePath) => `
+const templateMap = {
+  basic: (config) => {
+    const { title, content, basePath } = config;
+    return `
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,9 +35,28 @@ const pageTemplate = (title, content, basePath) => `
 ${content}
 </body>
 </html>
-`;
+`
+  },
+  contact: (config) => templateMap.basic({
+    ...config,
+    content: `
+<div>
+  <h2>This is the Discord part</h2>
+</div>
+<div>
+  <h2>This is the Groogle Maps part</h2>
+</div>
+<div>${config.content}</div>
+`
+  }),
+};
 
 const createPage = async (config) => {
+  const templateName = config.template || 'basic';
+  const pageTemplate = templateMap[templateName];
+  if (!pageTemplate) {
+    throw new Error(`No template found named: "${templateName}"`);
+  }
   const prefixedPath = join(outputDir, config.path);
   const folderPath = dirname(prefixedPath);
   await mkdir(
@@ -42,15 +64,19 @@ const createPage = async (config) => {
     {
       recursive: true,
     },
-  )
+  );
   const depth = config.path.split(sep).length - 1;
   const basePath = depth === 0 ? '.' : new Array(depth).fill('..').join('/');
   // TODO: Specify which page template to render this markdown with
-  const output = pageTemplate(
-    config.title,
-    md.render(config.content),
-    basePath
-  );
+  // - [x] Specify WHICH template with a frontMatter variable named `template`
+  // - [ ] Look on the filesystem in a folder called `templates` for that template
+  // - [ ] Load and parse that template, keep it cached by its name/primary key
+  // - [ ] Allow one template to reference/embed itself within another template
+  const output = pageTemplate({
+    ...config,
+    content: md.render(config.content),
+    basePath,
+  });
   writeFile(prefixedPath, output);
 };
 
@@ -70,9 +96,9 @@ const parseFrontMatter = (frontMatterString) => {
     }
     const [_wholeMatch, key, value] = regexResult;
     result[key.trim()] = value.trim();
-  })
+  });
   return result;
-}
+};
 
 const discoverPages = async (scanPath) => {
   // get list files in current folder
@@ -102,6 +128,7 @@ const discoverPages = async (scanPath) => {
       path: path.replace(/.md$/, '.html'),
       title: frontMatter.title,
       content: contentWithoutFrontMatter,
+      ...frontMatter,
     };
   }));
 };

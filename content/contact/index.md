@@ -1,5 +1,6 @@
 ---
 title: Contact
+template: contact
 ---
 
 # Contact Us!
