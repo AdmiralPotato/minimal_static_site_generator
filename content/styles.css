@@ -84,7 +84,7 @@ footer {
 #nav-menu-toggle {
   float: right;
   display: block;
-  margin: 0.5rem;
+  padding: 1rem;
 }
 
 #nav-menu-toggle > input[type="checkbox"] {
@@ -92,6 +92,7 @@ footer {
 }
 
 #nav-menu-icon {
+  display: block;
   width: 2rem;
   height: 2rem;
   background-repeat: no-repeat;
@@ -122,12 +123,12 @@ input[type="checkbox"]:checked ~ #nav-menu-icon {
   display: block;
   color: #fff;
   font-size: 1rem;
-  padding: 1rem;
+  padding: 0.5rem 2rem;
   cursor: pointer;
   line-height: 2rem;
   text-decoration: none;
   transition-duration: 0.25s;
-  transition-property: all;
+  transition-property: color;
   transition-timing-function: ease-in-out;
 }
 #nav-bar-items a.nav-donate {
@@ -152,6 +153,9 @@ input[type="checkbox"]:checked ~ #nav-menu-icon {
   }
   #nav-bar-items > li {
     display: inline-block;
+  }
+  #nav-bar-items > li a {
+    padding: 1rem 0.6rem;
   }
 }
 
