@@ -19,6 +19,7 @@
   --color-footer-dividing-line: #fff;
   --color-accent: #ffad43;
   --color-social-media-icons: #fff;
+  --color-unclicked-link: #1074c6;
   --color-link-highlight: #e700e7;
 }
 html,
@@ -29,7 +30,7 @@ body {
 body {
   background-color: var(--color-background);
   color: var(--color-text);
-  line-height: 16px;
+  line-height: 1.15rem;
   font-size: 14px;
   font-family: "Nanum Gothic", sans-serif;
   font-weight: 400;
@@ -64,6 +65,48 @@ h5,
 h6 {
   font-weight: 800;
   line-height: 1.25em;
+}
+
+a {
+  color: var(--color-unclicked-link);
+  text-underline-position: under;
+}
+
+a:hover,
+a:focus {
+  color: var(--color-link-highlight);
+}
+
+.footer-category-link,
+.footer-subcategory-link {
+  color: var(--color-text)
+}
+
+p {
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  text-align: justify;
+}
+
+p:has(img) {
+  text-align: center;
+}
+
+.special-alt-text {
+  font-size: 0;
+}
+
+hr {
+  margin-top: 1rem;
+  padding-top: 2rem;
+  border: 0 solid var(--color-footer-dividing-line);
+  border-top-width: 2px;
+}
+
+@media (min-width: 500px) {
+  p {
+    text-align: left;
+  }
 }
 
 header {
@@ -268,16 +311,20 @@ input[type="checkbox"]:checked ~ #nav-menu-icon {
   padding-top: 2rem;
   border: 0 solid var(--color-footer-dividing-line);
   border-top-width: 2px;
-  text-align: center;
   font-size: 0.75rem;
 }
 
 #footer-copywrite-block p {
   margin-bottom: 1rem;
   line-height: 1.5rem;
+  text-align: center;
 }
 
 #footer-copywrite-block p a {
   text-decoration: none;
   color: var(--color-accent);
+}
+
+#footer-copywrite-block p a:hover {
+  color: var(--color-link-highlight);
 }
