@@ -11,14 +11,23 @@
   text-align: inherit;
   box-sizing: border-box;
 }
+:root {
+  --color-background: #000;
+  --color-text: #fff;
+  --color-header: #191a16;
+  --color-footer: #191a16;
+  --color-footer-dividing-line: #fff;
+  --color-accent: #ffad43;
+  --color-link-highlight: #e700e7;
+}
 html,
 body {
   height: 100%;
   width: 100%;
 }
 body {
-  background-color: #000;
-  color: rgb(255, 255, 255);
+  background-color: var(--color-background);
+  color: var(--color-text);
   line-height: 16px;
   font-size: 14px;
   font-family: "Nanum Gothic", sans-serif;
@@ -57,12 +66,12 @@ h6 {
 }
 
 header {
-  background-color: rgb(25, 26, 22);
+  background-color: var(--color-header);
   width: 100%;
 }
 
 footer {
-  background-color: rgb(25, 26, 22);
+  background-color: var(--color-footer);
   width: 100%;
   padding: 1.5rem;
 }
@@ -120,7 +129,7 @@ input[type="checkbox"]:checked ~ #nav-menu-icon {
 
 #nav-bar-items a {
   display: block;
-  color: #fff;
+  color: var(--color-text);
   font-size: 1rem;
   padding: 1rem;
   cursor: pointer;
@@ -131,11 +140,11 @@ input[type="checkbox"]:checked ~ #nav-menu-icon {
   transition-timing-function: ease-in-out;
 }
 #nav-bar-items a.nav-donate {
-  color: #ffad43;
+  color: var(--color-accent);
 }
 #nav-bar-items a:hover,
 #nav-bar-items a:focus {
-  color: rgb(231, 0, 231);
+  color: var(--color-link-highlight);
 }
 
 @media (min-width: 768px) {
@@ -254,7 +263,7 @@ input[type="checkbox"]:checked ~ #nav-menu-icon {
 
 #footer-copywrite-block {
   padding-top: 2rem;
-  border: 0 solid #fff;
+  border: 0 solid var(--color-footer-dividing-line);
   border-top-width: 2px;
   text-align: center;
   font-size: 0.75rem;
@@ -267,5 +276,5 @@ input[type="checkbox"]:checked ~ #nav-menu-icon {
 
 #footer-copywrite-block p a {
   text-decoration: none;
-  color: #ffad43;
+  color: var(--color-accent);
 }
