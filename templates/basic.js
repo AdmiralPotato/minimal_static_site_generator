@@ -36,7 +36,7 @@ export default function (config) {
     <footer>
       <div id="footer-content">
         <div id="footer-nav-box socials">
-          <h3>Social media links</h3>
+          <h3 class="special-alt-text">Social media links</h3>
           <ul id="svg-link-list">
             <li><a class="svg-footer-link" id="svg-discord" href="https://discord.gg/uRSthurdPY">discord</a></li>
             <li><a class="svg-footer-link" id="svg-twitter" href="https://twitter.com/801labs">twitter</a></li>
@@ -53,7 +53,7 @@ export default function (config) {
               <li><a class="footer-subcategory-link" href="">News</a></li>
             </ul>
           </div>
-          <div class="footer-content-block"><a class="footer-category-link" href="">LEARN</a></div>
+          <div class="footer-content-block"><h3><a class="footer-category-link" href="">LEARN</a></h3></div>
           <div class="footer-content-block">
             <h3><a class="footer-category-link" href="">GET INVOLVED</a></h3>
             <ul>
@@ -66,14 +66,14 @@ export default function (config) {
           <div class="footer-content-block"><h3><a class="footer-category-link" href="">CONTACT US</a></h3></div>
         </div>
         <div id="footer-copywrite-block">
-          <p class="footer-copy-text">Â© 2024 801Labs.org. All rights reserved.</p>
-          <p class="footer-copy-text"><a href="" id="footer-donate-link">Donate ></a></p>
+          <p class="footer-copy-text">© 2024 801Labs.org. All rights reserved.</p>
+          <p class="footer-copy-text"><a href="#" id="footer-donate-link">Donate ></a></p>
           <p class="footer-copy-text">
             801 Labs hackerspace is a 501(c)(3) that is open to the public! <br />
             353 East 200 South Suite #201, Salt Lake City, UT 84111
           </p>
           <p class="footer-copy-text">
-            <a class="footer-link" href="">Code of Conduct</a> | <a class="footer-link" href="">Terms</a>
+            <a class="footer-link" href="#">Code of Conduct</a> | <a class="footer-link" href="#">Terms</a>
           </p>
         </div>
       </div>
