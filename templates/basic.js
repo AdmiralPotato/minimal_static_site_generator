@@ -17,7 +17,7 @@ export default function (config) {
       <div id="site-logo"><a href="${basePath}/">Home</a></div>
       <label id="nav-menu-toggle" for="nav-collapse-button">
         <input type="checkbox" id="nav-collapse-button" />
-        <div id="nav-menu-icon"></div>
+        <span id="nav-menu-icon"></span>
       </label>
       <nav id="nav-bar">
         <ul id="nav-bar-items">
