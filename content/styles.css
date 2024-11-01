@@ -131,7 +131,7 @@ input[type="checkbox"]:checked ~ #nav-menu-icon {
   display: block;
   color: var(--color-text);
   font-size: 1rem;
-  padding: 1rem;
+  padding: 1rem 0.75rem;
   cursor: pointer;
   line-height: 2rem;
   text-decoration: none;
