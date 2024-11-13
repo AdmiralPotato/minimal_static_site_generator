@@ -14,7 +14,7 @@
 
 :root {
   --color-background: #000;
-  --color-background-header-gradient: #031300;
+  --color-background-header-gradient: #1457096b;
   --color-text: #fff;
   --color-title-text-glow: #00c58f;
   --color-h2: #28d528;
@@ -22,7 +22,7 @@
   --color-h4-strong-glow: #71dcbd;
   --color-box-border: #008000;
   --color-box-border-highlight: #01d401;
-  --color-box-background-transparent: #0080002c;
+  --color-box-background-transparent: #03310385;
   --color-box-background-semitransparent: #0080005d;
   --color-faq-header: #004f09;
   --color-header: #191a16;
@@ -377,13 +377,24 @@ input[type="checkbox"]:checked ~ #nav-menu-icon {
   height: 8rem;
   width: 100%;
   display: flex;
+  position: relative;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: center; 
+}
+
+.page-title-box::before {
+  display:block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  content: "";
   background-image: url(images/transparent_grid.png), 
-                    linear-gradient(to bottom, var(--color-background-header-gradient) 0%, 
-                    var(--color-background) 50%);
-  
+  linear-gradient(to bottom, var(--color-background-header-gradient) 0%, 
+  var(--color-background) 80%);
+  opacity: .9;
+  mask-image: linear-gradient(to bottom, #ffff, #0000);
+  z-index: -1;
 }
 
 .content.organization {
