@@ -32,3 +32,10 @@ export const readMarkdownWithFrontMatter = async (scanPath, path) => {
   const frontMatter = parseFrontMatter(frontMatterString);
   return { frontMatter, markdown };
 }
+
+
+const unwrapRegex = /^['"](.*)['"]$/;
+
+export const unwrapString = (string) => {
+    return unwrapRegex.exec(string)[1];
+}
