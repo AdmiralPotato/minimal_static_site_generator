@@ -4,7 +4,7 @@ slug: first-vivokey-spark
 date_published: 2018-12-12T23:42:05.000Z
 date_updated: 2019-01-09T01:41:06.000Z
 tags: biohacking, RFID
-cover: '2018/12/091816humanchip_1280x720.jpg'
+cover: '091816humanchip_1280x720.jpg'
 author_name: Pips
 author_avatar: 'avatars/pips.jpg'
 ---
@@ -60,7 +60,7 @@ person to have a VivoKey Spark doin' things in their body.
 > [pic.twitter.com/UhtW7mDKZb](https://t.co/UhtW7mDKZb) &mdash; Pips (@Pips801)
 > [December 10, 2018](https://twitter.com/Pips801/status/1072276390173532162?ref_src=twsrc%5Etfw)
 
-![](2018/12/image.jpg)
+![](image.jpg)
 
 On opening, there is a card that tells you to STOP! and not continue until you
 visit [vivokey.com/spark](http://vivokey.com/spark). Sadly, the page does not
@@ -83,7 +83,7 @@ Fidesmo/Fidesmo-capable chip.
 
 If you scan it with an NFC app, it reveals this information about the tag.
 
-![](2018/12/image-1.jpg)
+![](image-1.jpg)
 
 The tag appears to be emulating a standard NFC tag with enough storage to store
 a URL on it in the standard NFC URL format. The url is unique per chip. However,

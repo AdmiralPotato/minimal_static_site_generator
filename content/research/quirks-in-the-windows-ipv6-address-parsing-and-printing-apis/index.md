@@ -5,7 +5,7 @@ date_published: 2020-12-04T07:00:00.000Z
 date_updated: 2020-12-04T08:46:01.000Z
 tags: research, WINDOWS API, IPv6
 excerpt: Half of the world still lacks Internet access, but there are no IPv4 addresses left to hand out - which means that software libraries for IPv6 deserve scrutiny now.
-cover: '2020/12/ipv6_sticker.jpg'
+cover: 'ipv6_sticker.jpg'
 author_name: Alex Henrie
 author_avatar: 'avatars/alexhenrie.png'
 ---

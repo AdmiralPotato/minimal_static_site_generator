@@ -5,7 +5,7 @@ date_published: 2019-02-07T04:32:00.000Z
 date_updated: 2019-07-11T22:31:47.000Z
 tags: how to, DLL Injection, Windows Hacking, Development, memory, Windows API
 excerpt:
-cover: '2019/07/process-explorer-test-dll-injection-success.png'
+cover: 'process-explorer-test-dll-injection-success.png'
 author_name: th3v0id
 author_avatar: 'avatars/th3v0id.jpg'
 ---
@@ -199,9 +199,9 @@ _get_dll_path() function:_
 Tying our code together and testing it out ~ we run `.\InjectDLL.exe`, then
 enter the remote target PID, and finally the absolute path to `TestDLL.dll`. Our
 executable outputs some information about the injection indicating it was
-successful.  
+successful.
 
-![](2019/07/2019-05-02-090559_3440x1440_scrot.png "Successful execution of our DLL injector")
+![](2019-05-02-090559_3440x1440_scrot.png "Successful execution of our DLL injector")
 
 Our injector indicated it was successful, but we can double check with Window's
 [Process Explorer](https://docs.microsoft.com/en-us/sysinternals/downloads/process-explorer).
@@ -211,7 +211,7 @@ checking the `View -> Show Lower Pane` option. Then, select the remote target
 process in the list and press the key combination `Ctrl + d`. You should now see
 a list of loaded DLLs. One of which is our DLL!
 
-![](2019/07/process-explorer-test-dll-injection-success.png "Using Process Explorer, we can see that our TestDLL.dll file was injected into Game.exe successfully.")
+![](process-explorer-test-dll-injection-success.png "Using Process Explorer, we can see that our TestDLL.dll file was injected into Game.exe successfully.")
 
 Once we have successfully loaded our DLL into the target process, we can access
 and reference anything within it's virtual memory space. In part 2, I'll

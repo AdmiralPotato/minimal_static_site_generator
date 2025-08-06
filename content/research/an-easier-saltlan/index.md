@@ -5,7 +5,7 @@ date_published: 2018-11-28T03:20:06.000Z
 date_updated: 2018-11-28T03:20:55.000Z
 tags:
 excerpt: My family does an annual LAN Party and one of the biggest complaints we have is that Steam takes ages to download for everyone.
-cover: '2018/11/image-12.jpg'
+cover: 'image-12.jpg'
 author_name: bashNinja
 author_avatar: 'avatars/bashNinja.jpeg'
 ---
@@ -36,7 +36,7 @@ delete/shrink the cache drive since it won't be needed later and I want to keep
 the NVMe space available for other projects. I'll keep the OS & Dockers on the
 mSata drive, powered off, for future use.
 
-![](2018/11/image-4.jpg "VM Configuration")
+![](image-4.jpg "VM Configuration")
 
 Follow the normal Ubuntu install setup.
 
@@ -68,7 +68,7 @@ settings easily.
     sudo mkdir /opt/appdata/
     docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v /opt/appdata/portainer:/data --restart unless-stopped --name portainer portainer/portainer
 
-![](2018/11/image-5.jpg)
+![](image-5.jpg)
 
 Bam! Now you should be able to access Portainer
 
@@ -121,11 +121,11 @@ Containers -> + Add Container
 
 Then fill in the Settings. I'll show screenshots for a Steam Cache:
 
-![](2018/11/Screenshot_2018-11-19-18.52.56_wehvoV.jpg "Main Steam Container Settings")
+![](Screenshot_2018-11-19-18.52.56_wehvoV.jpg "Main Steam Container Settings")
 
-![](2018/11/image-8.jpg "Steam Volume Mount Paths")
+![](image-8.jpg "Steam Volume Mount Paths")
 
-![](2018/11/image-10.jpg "Steam Restart Policy")
+![](image-10.jpg "Steam Restart Policy")
 
 Once all those are done, you can go ahead and deploy the container.
 
@@ -142,11 +142,11 @@ your environment.
 
 The only one I'll show is the SteamDNS env variables:
 
-![](2018/11/image-13.jpg "SteamDNS ENV Variables")
+![](image-13.jpg "SteamDNS ENV Variables")
 
 Beyond that, you can handle it. Here's what mine looked like completed:
 
-![](2018/11/image-12.jpg "All Caching Containers")
+![](image-12.jpg "All Caching Containers")
 
 ### Step 7 - Set your router DNS
 

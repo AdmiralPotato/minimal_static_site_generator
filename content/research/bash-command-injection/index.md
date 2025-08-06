@@ -5,7 +5,7 @@ date_published: 2025-01-28T03:15:00.000Z
 date_updated: 2025-01-28T03:15:00.000Z
 tags: linux, shell, bash, command injection, parsing, langsec
 excerpt: It turns out you can use special characters in linux names.  What could possibly go wrong?
-cover: '2024/01/bash-source.png'
+cover: 'bash-source.png'
 author_name: MalcolmS
 author_avatar: 'avatars/malcolms.jpg'
 ---

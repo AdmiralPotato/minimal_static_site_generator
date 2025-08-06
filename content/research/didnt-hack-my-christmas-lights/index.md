@@ -5,7 +5,7 @@ date_published: 2018-12-27T03:49:44.000Z
 date_updated: 2018-12-27T03:50:12.000Z
 tags:
 excerpt:
-cover: '2018/12/A7B65125-AF02-44C0-8FBF-0D2D0236161F-1.jpg'
+cover: 'A7B65125-AF02-44C0-8FBF-0D2D0236161F-1.jpg'
 author_name: kimb3r
 author_avatar: 'avatars/kimb3r.jpg'
 ---
@@ -29,7 +29,7 @@ got them connected to my wifi ASAP. You can buy additional Philips Illuminate
 branded extension light strings to hook up to your main strand, which maxes out
 at 300 lights per control box.
 
-![](2018/12/IMG_3415.jpg "a mix of birbs, the colored Philips lights, and a strand of normal lights. note the green control box to the bottom left")
+![](IMG_3415.jpg "a mix of birbs, the colored Philips lights, and a strand of normal lights. note the green control box to the bottom left")
 
 In order to connect to your Philips Illuminate lights, you download the
 Illuminate app, connect to the wifi the control box emanates, and provide the
@@ -51,7 +51,7 @@ First of all, if these things are on my wifi network, they've got to have an IP
 address and my particular starting point for poking at things on my network is
 to do an nmap scan:
 
-![](2018/12/image-19.jpg)
+![](image-19.jpg)
 
 Choose whatever nmap scan you want, but this one hits all the ports tcp and udp
 so you can get a general idea of what the network functions of this device are.
@@ -69,12 +69,12 @@ interface. By browsing to the IP address, I got a login prompt where I tried
 every different formulation of admin/admin, admin/password, root/[blank]...
 nothing.
 
-![](2018/12/Screen-Shot-2018-12-26-at-10.24.57-AM.jpg "a challenge")
+![](Screen-Shot-2018-12-26-at-10.24.57-AM.jpg "a challenge")
 
 Also note the truly beautiful shade of pink you get upon failed login... the
 kind of pink that makes you want to attempt more.
 
-![](2018/12/Screen-Shot-2018-12-26-at-10.29.47-AM.jpg "heck.")
+![](Screen-Shot-2018-12-26-at-10.29.47-AM.jpg "heck.")
 
 At this point I was pretty okay with trying anything I could to get into what I
 assumed was a web interface to change settings with the lights. Following
@@ -106,18 +106,18 @@ put these things on an isolated test network just to be able to make sure
 nothing else was messing with them and snatch a pcap of opening my app and
 issuing a series of on-off commands:
 
-![](2018/12/Screen-Shot-2018-12-25-at-4.13.02-PM.jpg "things happening over port 5577!!")
+![](Screen-Shot-2018-12-25-at-4.13.02-PM.jpg "things happening over port 5577!!")
 
 and look! Confirmation that commands are indeed issued over port 5577. But how
 can you confirm for absolutely certain that it's not just random chatter? Follow
 the streams:
 
-![](2018/12/Screen-Shot-2018-12-25-at-4.26.26-PM.jpg "Repetitive commands being issued! Hooray!")
+![](Screen-Shot-2018-12-25-at-4.26.26-PM.jpg "Repetitive commands being issued! Hooray!")
 
 That's what a series of on-off commands looks like, and here's what a series of
 switching between the two custom programs I made on the app look like:
 
-![](2018/12/Screen-Shot-2018-12-25-at-4.36.31-PM.png "a bit more complex")
+![](Screen-Shot-2018-12-25-at-4.36.31-PM.png "a bit more complex")
 
 So as you can see, a bit more complicated when you get into the fancy settings
 like color changes and fade speeds. When looking through the pcaps for different
@@ -132,7 +132,7 @@ in the PCAPs I took: this controller randomly spits out the either the ip
 address, hostname, mac address in a string or every so often a string of
 "HF-A11ASSISTHREAD" over UDP on port 48899.
 
-![](2018/12/Screen-Shot-2018-12-26-at-1.46.48-PM.png "a friendly network device")
+![](Screen-Shot-2018-12-26-at-1.46.48-PM.png "a friendly network device")
 
 This didn't correspond with any hostnames, so I immediately threw it into Google
 and found out some excellent information about the Zengge Lightbulb
@@ -149,7 +149,7 @@ commands over port 5577. The mysterious port 48899 is the ability to control
 some options for the device, but lucky for me the default HTTP login found on
 the internet for the device works!
 
-![](2018/12/Screen-Shot-2018-12-25-at-5.37.14-PM.jpg "Answers!")
+![](Screen-Shot-2018-12-25-at-5.37.14-PM.jpg "Answers!")
 
 Here is where we can configure some cool information about the device's settings
 for sending and receiving commands, but honestly I'm not even going to touch it

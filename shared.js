@@ -1,5 +1,5 @@
 import { readFile } from 'fs/promises';
-import { join } from 'path/posix';
+import { join, basename, normalize } from 'path/posix';
 
 export const parseFrontMatter = (frontMatterString) => {
   const result = {};
@@ -18,7 +18,7 @@ export const parseFrontMatter = (frontMatterString) => {
 };
 
 export const readMarkdownWithFrontMatter = async (scanPath, path) => {
-  const inputPath = join(scanPath, path);
+  const inputPath = normalize(join(scanPath, path));
   const content = await readFile(inputPath, { encoding: 'utf8' });
   // console.log('What is content?', content);
   const frontMatterRegex = /^---\n(.*?)\n---\n/s;
@@ -30,7 +30,11 @@ export const readMarkdownWithFrontMatter = async (scanPath, path) => {
   const [remove, frontMatterString] = regexResult;
   const markdown = content.replace(remove, '').trim();
   const frontMatter = parseFrontMatter(frontMatterString);
-  return { frontMatter, markdown };
+  return {
+    frontMatter,
+    markdown,
+    contentPath: normalize(inputPath.replace(basename(inputPath), '')),
+  };
 }
 
 

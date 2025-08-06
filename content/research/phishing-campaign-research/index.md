@@ -5,7 +5,7 @@ date_published: 2018-10-27T05:12:56.000Z
 date_updated: 2018-10-31T21:57:01.000Z
 tags: research, phishing
 excerpt: An email came in that an end user thought was suspicious. The end user passed it up to one of our team members, who then passed it up to me.
-cover: '2018/10/image-3.jpg'
+cover: 'image-3.jpg'
 author_name: Pips
 author_avatar: 'avatars/pips.jpg'
 ---
@@ -13,14 +13,14 @@ author_avatar: 'avatars/pips.jpg'
 An email came in that an end user thought was suspicious. The end user passed it
 up to one of our team members, who then passed it up to me.
 
-![](2018/10/image.jpg "Initial phishing email")
+![](image.jpg "Initial phishing email")
 
 To start off, this email is just dumb. The sender never bothered to copy
 legitimate Microsoft email formatting, and the wording is just strange. It
 doesn’t inspire even the most inexperienced users to “_**rectify password
 expiration**_”. Just for fun, let’s look at the url.
 
-![](2018/10/image-2.jpg "Suspicious url")
+![](image-2.jpg "Suspicious url")
 
 `hxxp://piba.org.br` isn’t a known phishing site, it goes to a Portuguese church
 website. The site doesn’t matter, what does matter is it looks like the script
@@ -32,7 +32,7 @@ the campaign from being detected.
 Once you click the link that passes through WordPress, you end up at a
 not-so-convincing office 365 login page.
 
-![](2018/10/image-3.jpg "Bad credential harvesting page")
+![](image-3.jpg "Bad credential harvesting page")
 
 The email address in the link autofills the email box for your account. Let’s
 point out some interesting things about this scam site though.
@@ -43,13 +43,13 @@ point out some interesting things about this scam site though.
 
 Why don’t they work? Because they’re **images**.
 
-![](2018/10/image-4.jpg "Everything is a background image, instead of HTML/CSS")
+![](image-4.jpg "Everything is a background image, instead of HTML/CSS")
 
 Let’s look at the url and domain. `hxxp://fwclub.co.za/` is a winemaker’s club.
 It also doesn’t appear to be running any special framework either that would be
 exploitable.
 
-![](2018/10/image-5.jpg "No interesting services detected")
+![](image-5.jpg "No interesting services detected")
 
 There are quite a few open ports as well on this server, four of them are
 CPanel. It’s possible that the person running this phishing campaign got access
@@ -59,27 +59,27 @@ Back to the original url, `hxxp://fwclub.co.za/includes/Office1/Login.php`. If
 we try one directory up, `/Office1/`, it redirects back to this script. So, lets
 go up another directory to `/includes/`.
 
-![](2018/10/image-6.jpg "All the scripts!")
+![](image-6.jpg "All the scripts!")
 
 Hmm, looks like directory listing is turned on, and… there’s a recent backup of
 their phishing campaign. Let’s look at this backup.
 
-![](2018/10/image-7.jpg)
+![](image-7.jpg)
 
 Yup, that’s the source code to the credential dumping code. A day later, the
 domain is shut down in one form or another :(
 
-![](2018/10/image-8.jpg)
+![](image-8.jpg)
 
 Sophos also flagged the site, finally.
 
-![](2018/10/image-9.jpg)
+![](image-9.jpg)
 
 Well, we’ve still got their source code, so let’s take a look.
 
 `blocker.php` is a very interesting file.
 
-![](2018/10/image-10.jpg)
+![](image-10.jpg)
 
 The code uses a function I’ve never actually seen in PHP before,
 `gethostbyaddr()`, which attempts to lookup the incoming IP address to a
@@ -114,7 +114,7 @@ Once it has checked the incoming request, the index.php file sets the header
 It’s interesting that the phishing author attempted to make the URL look more
 legitimate and lengthy, as many official emails are.
 
-![](2018/10/image-11.jpg)
+![](image-11.jpg)
 
 Once it goes to the Login.php page, it loads the two images and two text boxes
 that are supposed to look like, and auto fills the email address, to make it
@@ -125,16 +125,16 @@ interesting happens. The first thing the script does, is gets the visitors
 country from geoplugin.net. The second thing it does, is craft a basic email and
 loads in the submitted username, password, ip, browser, date, and geoip lookup.
 It then sets the TO: field of this email to ipconfigura@gmail.com, the subject
-to `“Office365 | <country> | <username>”`  and lastly sets the FROM: field to
+to `“Office365 | <country> | <username>”` and lastly sets the FROM: field to
 `“John De Fisher <new@cpanel.com>”`.
 
-![](2018/10/image-12.jpg)
+![](image-12.jpg)
 
 After it crafts this email, it then runs a function called `check()` from inside
 a PHPMailer directory from the script `smtp.php`, and passes the submitted
 username and password. Let’s look at this script then.
 
-![](2018/10/image-13.jpg)
+![](image-13.jpg)
 
 This `check()` function is incredibly clever. It connects to the office365 SMTP
 server, authenticates with the server using the submitted credentials, sets the
@@ -153,6 +153,6 @@ validity of the credentials. It also allows the phishing author to provide a
 “Password not recognized” message, to skeptical users who input a wrong password
 the first time to see if it works or not.
 
-![](2018/10/image-14.jpg)
+![](image-14.jpg)
 
 Aaand that's the analysis of this phishing campaign.

@@ -5,7 +5,7 @@ date_published: 2018-11-16T22:41:43.000Z
 date_updated: 2018-11-16T22:41:43.000Z
 tags: EE, RE
 excerpt: Excitement! There was a sketchy padded envelope in the mail today. Where do we go next?
-cover: '2018/11/IMG_20180416_194909.jpg'
+cover: 'IMG_20180416_194909.jpg'
 author_name: David Freitag
 author_avatar: 'avatars/david-freitag.jpg'
 ---
@@ -18,7 +18,7 @@ otherwise, have a nasty habit of making it nearly impossible to find proper
 documentation for a specific product; whether it's poorly documented, NDA'd, or
 in some cases simply nonexistent.
 
-![](2018/11/take_my_money.png)
+![](take_my_money.png)
 
 So what can you do? You could find someone who sells a product based on the chip
 you want to use, but if it's extensible and has a lot of features you may not be
@@ -53,7 +53,7 @@ pricey. At the time of this writing, the
 that I bought these for $10 404's, but you can still get these boards fairly
 cheaply.
 
-![](2018/11/odroid_emmc-1.jpg)
+![](odroid_emmc-1.jpg)
 
 So you buy a couple of these, they're on the slow boat from China. What's the
 first step? Is there anything we can do while we wait? Of course! The top and
@@ -65,7 +65,7 @@ what's going on. From the datasheet we have the pinout and other general
 information about the chip that will help us, and we have the pinout of the eMMC
 connector because it's one of the ODROID standardized ones.
 
-![](2018/11/odroid_emmc.jpg)
+![](odroid_emmc.jpg)
 
 Excitement! There was a sketchy padded envelope in the mail today. Where do we
 go next? You're going to need some hot air reworking tools and a relatively high
@@ -76,9 +76,9 @@ with anything above ~600 DPI. Start by removing all of the tall components,
 large capacitors, connectors, etc. The taller the components, the more out of
 focus the images you take will be, most scanners have a fixed focal point.
 
-![](2018/11/emmc_crystal.jpg "4800 DPI scans are crazy")
+![](emmc_crystal.jpg "4800 DPI scans are crazy")
 
-![](2018/11/img010_small.jpg)
+![](img010_small.jpg)
 
 Once you have some quality scans of the board, start carefully removing
 components one by one. If there are reference designators on the board, use them
@@ -104,28 +104,28 @@ many scans as you want, once you start sanding there's no turning back.
     C19       108nF
     C20       108nF
 
-![](2018/11/img011_small.jpg)
+![](img011_small.jpg)
 
 For the sanding, I used a combination of 200 and 600 grit wet dry sand paper.
 You can get this at any local hardware store. Taking off the soldermask will be
 extremely quick, especially on this board where you can literally see through
 the soldermask. Wet a small piece of the 600 grid sand paper and start sanding
 
-![](2018/11/img013_small.jpg "Top Copper Layer")
+![](img013_small.jpg "Top Copper Layer")
 
 You can see that the contrast on the bare copper compared to the PCB core
 material is much higher compared to when everything is covered with soldermask.
 Next, we switch to the 200 grit to sand through the much thicker layer of copper
 and core material so that we can expose the inner layer.
 
-![](2018/11/img015_small.jpg "Core material")
+![](img015_small.jpg "Core material")
 
 Be sure to apply even pressure while sanding, if you don't you can end up with
 edges of the board that sand clear through the inner copper layer like I did.
 It's going to take a while, and make a gigantic mess. My desk is still a sickly
 shade of green because of this project.
 
-![](2018/11/img016_small.jpg "Inner Copper Layer 2")
+![](img016_small.jpg "Inner Copper Layer 2")
 
 Again, I need to stress that even pressure is extremely important, you can see I
 even started to wear away parts of that power rail. Once you get to this point,
@@ -137,7 +137,7 @@ you get something you can understand. In this case, I chose red for the top
 layer, green for layer 2, and blue for the bottom layer. The result is pretty
 good, but if you really put some work into it you can get really great images.
 
-![](2018/11/img013_composite_small.jpg "Composited image with 3 copper layers")
+![](img013_composite_small.jpg "Composited image with 3 copper layers")
 
 Now that the RE work is done, it's time to do your schematic and layout work.
 The WIP repository can be found [here](https://github.com/dvdfreitag/USB3-eMMC),
@@ -147,4 +147,4 @@ notice that the connector and pinout for the eMMC that I chose is identical to
 the one that the Nintendo Switch uses. This board is meant to be a high speed
 NAND backup and restore utility for the Switch.
 
-![](2018/11/emmc_re.jpg)
+![](emmc_re.jpg)

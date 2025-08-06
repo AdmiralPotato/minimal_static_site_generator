@@ -5,7 +5,7 @@ date_published: 2018-10-31T01:25:25.000Z
 date_updated: 2018-10-31T01:25:25.000Z
 tags: research, how to
 excerpt: Hiding data in new and interesting places has always been a fun objective for anyone who likes creating and solving challenges. One of the interesting secret hiding places for data I like to use is server headers.
-cover: '2018/10/4TJDOj5.jpg'
+cover: '4TJDOj5.jpg'
 author_name: Pips
 author_avatar: 'avatars/pips.jpg'
 ---
@@ -18,7 +18,7 @@ I found out that you can override server headers live in-page with PHP's
 `header()` function. Combine this with some ascii art, and in the header of a
 server response you can now show people super hidden ascii art.
 
-![](2018/10/image-15.png)
+![](image-15.png)
 
 Here's the code to make it happen. Replace the `$subject` with new ascii art.
 

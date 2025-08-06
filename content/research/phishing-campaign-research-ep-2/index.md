@@ -4,19 +4,19 @@ slug: phishing-campaign-research-ep-2
 date_published: 2018-10-31T21:57:10.000Z
 date_updated: 2018-11-15T01:33:29.000Z
 tags: research, phishing
-excerpt: I got another email. This one was interesting, the email was the standard "we had a rat on your computer that we used to take dirty pictures of you, give us money or we will  send it to all your contacts".
-cover: '2018/11/chrome_2018-11-14_11-31-28.png'
+excerpt: I got another email. This one was interesting, the email was the standard "we had a rat on your computer that we used to take dirty pictures of you, give us money or we will  send it to all your contacts".
+cover: 'chrome_2018-11-14_11-31-28.png'
 author_name: Pips
 author_avatar: 'avatars/pips.jpg'
 ---
 
 I got another email. This one was interesting, the email was the standard "we
-had a rat on your computer that we used to take dirty pictures of you,  give us
-money or we will  send it to all your contacts".
+had a rat on your computer that we used to take dirty pictures of you, give us
+money or we will send it to all your contacts".
 
 This is the email that I received.
 
-![](2018/10/image-17.png "The scam email")
+![](image-17.png "The scam email")
 
 It's a fairly standard "give us money or we send dirty photos we took to your
 contacts" kind of scam email, but this one actually does something that I have
@@ -28,7 +28,7 @@ DB, and sent out an email.
 This scam is incredibly effective when you consider that a vast majority of
 people use the same password for every account.
 
-This scam also does something unique; they spoofed the sender of this email  to
+This scam also does something unique; they spoofed the sender of this email to
 be me.
 
     Delivered-To: hello@[redacted]
@@ -60,17 +60,17 @@ Digging a little deeper and looking at the email headers above, the IP that sent
 the email is `171.99.132.162`. This IP appears to be a standard telecom IP
 address, belonging to a Broadband ISP located out of Bangkok, Thailand.
 
-![](2018/11/image.png)
+![](image.png)
 
 Riskiq also only has two carrier-assigned DNS records for this IP address
 
-![](2018/11/image-1.jpg)
+![](image-1.jpg)
 
 It appears that this IP is for sure a private (possibly residential IP). Is this
 IP the actual IP of the scammer? I hope they they wouldn't be so dumb, but who
 knows. Lets poke at it on [Shodan](https://www.shodan.io).
 
-![](2018/11/image-2.png)
+![](image-2.png)
 
 The only running service on this host is a web server. Ohhh boy, that's great.
 Since there was no DNS record for a TLD pointing towards this IP, it's safe to
@@ -78,7 +78,7 @@ assume that it is a residential/business host that opened up a web server for
 something, or the scammer is running this from their home IP and has a web
 server running. Lets see whats on it.
 
-![](2018/11/image-3.jpg)
+![](image-3.jpg)
 
 It appears this IP address is hosting a Hikvision camera control panel. Cameras
 are the number one compromised host for botnets or malicious activity on the

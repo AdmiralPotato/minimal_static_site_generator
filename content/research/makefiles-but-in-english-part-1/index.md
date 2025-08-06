@@ -5,7 +5,7 @@ date_published: 2018-12-13T00:00:00.000Z
 date_updated: 2018-12-18T03:37:10.000Z
 tags: how to, Makefile
 excerpt: Make is intelligent enough to be able to distinguish between them at runtime. But it's probably best to avoid storing different types in a variable.
-cover: '2018/12/makefile-1.jpg'
+cover: 'makefile-1.jpg'
 author_name: David Freitag
 author_avatar: 'avatars/david-freitag.jpg'
 ---
