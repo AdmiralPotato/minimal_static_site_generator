@@ -24,7 +24,7 @@ export default async function (config) {
       const sourcePath = normalize(`${inputPrefix}${pathRoot}${link}${unwrapString(frontMatter.cover)}`)
       const canvas = createCanvas(width, height)
       const ctx = canvas.getContext('2d')
-      console.log('sourcePath:', sourcePath);
+      console.log('Generating thumbnail for:', sourcePath);
       const image = await loadImage(sourcePath)
       const longerAxis = Math.max(image.width, image.height)
       if (longerAxis === image.width) {

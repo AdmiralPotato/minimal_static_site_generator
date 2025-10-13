@@ -16,9 +16,6 @@
   --color-background: #000;
   --color-background-header-gradient: #1457096b;
   --color-text: #fff;
-  --color-title-text-glow: #00c58f;
-  --color-h2: #28d528;
-  --color-h2-glow: #71dcbd;
   --color-h4-strong-glow: #71dcbd;
   --color-box-border: #008000;
   --color-box-border-highlight: #01d401;
@@ -29,6 +26,7 @@
   --color-footer: #191a16;
   --color-footer-dividing-line: #fff;
   --color-accent: #ffad43;
+  --accent-opacity: 0.5;
   --color-social-media-icons: #fff;
   --color-unclicked-link: #1074c6;
   --color-link-highlight: #e700e7;
@@ -41,47 +39,105 @@ body {
   width: 100%;
 }
 
+@font-face {
+  font-family: "JetBrainsMono";
+  src: url("assets/JetBrainsMono-variableWeight.ttf") format("truetype");
+}
+
+html {
+  color: var(--color-text);
+  line-height: 2rem;
+  font-size: 16px;
+  font-family: "JetBrainsMono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
 body {
   background-color: var(--color-background);
-  color: var(--color-text);
-  line-height: 1.15rem;
-  font-size: 16px;
-  font-family: "Nanum Gothic", sans-serif;
-  font-weight: 700;
-  font-style: normal;
+  background: linear-gradient(to right, #1a003c, #5a004d);
 }
 
 .container {
   text-align: center;
   margin: 0 auto;
+  padding: 32px;
+}
+
+.window {
+  position: relative;
+  background-color: #0008;
+  border: 2px solid var(--color-accent);
+  border-left: calc(2rem + 2px) solid var(--color-accent);
+  color: var(--color-text);
+  padding: 0.25rem;
+  margin: auto;
+}
+@media (min-width: 500px) {
+  .window {
+    max-width: 960px;
+  }
+}
+.window::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: "";
+  border: 2px solid var(--color-accent);
+  opacity: var(--accent-opacity);
+  margin: 0.25rem;
+}
+.window::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -2rem;
+  width: 2rem;
+  content: "";
+  /*border-right: 2px solid var(--color-accent);*/
+  background-image:
+    url(images/ui/sidebar_widgets.svg),
+    linear-gradient(to right, #000 30px, #0000 30px);
+  background-position: top left;
+  background-repeat: no-repeat;
+  mix-blend-mode: multiply;
+}
+
+em {
+  color: var(--color-accent);
+  font-style: normal;
 }
 
 h1 {
   font-size: 2.5rem;
-  font-family: "Tomorrow", sans-serif;
-  font-weight: 600;
+  font-weight: 800;
   letter-spacing: .1rem;
   font-style: normal;
-  text-shadow: var(--color-title-text-glow) 0 0 5px, 
-               var(--color-title-text-glow) 0 0 6px, 
-               var(--color-title-text-glow) 0 0 7px;
 }
 
 h2 {
   padding-top: 1rem;
   font-size: 2.25rem;
-  font-family: "Tomorrow", sans-serif;
   font-weight: 500;
-  color: var(--color-h2);
-  text-shadow: #000 0 0 1px,#000 0 0 1px,
-               #000 0 0 2px,#000 0 0 2px,
-               var(--color-h2-glow) 0 0 3px, var(--color-h2-glow) 0 0 3px;
 }
 
 h3 {
   font-size: 1.5rem;
-  font-family: "Tomorrow", sans-serif;
   font-weight: 500;
+}
+p+h1::before,
+p+h2::before,
+p+h3::before,
+h1::after,
+h2::after,
+h3::after {
+  content: "";
+  display: block;
+  position: relative;
+  margin: 0 2px;
+  border-bottom: 2px solid var(--color-accent);
+  opacity: var(--accent-opacity);
 }
 
 h3 strong {
@@ -144,13 +200,6 @@ hr {
   padding-top: 2rem;
   border: 0 solid var(--color-footer-dividing-line);
   border-top-width: 2px;
-}
-
-@media (min-width: 500px) {
-  p {
-    text-align: left;
-    padding: 0.5rem 2rem;
-  }
 }
 
 header {
@@ -575,11 +624,7 @@ input[type="checkbox"]:checked ~ .faq-toggle-icon {
 .equipment-tool-list-container div h4 {
   margin-bottom: 1rem;
   font-size: 1.5rem;
-  font-family: "Tomorrow", sans-serif;
   font-weight: 600;
-  text-shadow: #000 0 0 2px,#000 0 0 2px,
-               #000 0 0 2px,#000 0 0 2px,
-               var(--color-h2) 0 0 5px, var(--color-h2) 0 0 5px;
 }
 
 .tool-list {
