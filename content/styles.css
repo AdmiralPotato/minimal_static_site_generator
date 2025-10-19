@@ -56,6 +56,22 @@ body {
   background-color: var(--color-background);
   background: linear-gradient(to right, #1a003c, #5a004d);
 }
+body::before{
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  mix-blend-mode: multiply;
+  background-image: url('./images/ui/background.svg');
+  background-position: center;
+  background-size: 101vmax;
+  background-attachment: fixed;
+  opacity: 0.9;
+}
 
 .container {
   text-align: center;
