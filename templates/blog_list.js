@@ -1,14 +1,15 @@
-import { normalize } from 'node:path';
+import { normalize, dirname } from 'node:path';
 import { readdir, writeFile } from 'node:fs/promises'
 import { readMarkdownWithFrontMatter, unwrapString } from '../shared.js'
 import basic from './basic.js'
 import { createCanvas, loadImage } from '@napi-rs/canvas'
 
 export default async function (config) {
-  const pathRoot = 'research/'
+  const { basePath } = config;
+  const pathRoot = dirname(config.path) + '/'
   const inputPrefix = `content/`
   const inputPath = `${inputPrefix}${pathRoot}`
-  const outputPrefix = `dist/`
+  const outputPrefix = `temp/`
   const thumbnailSize = 512
   const width = thumbnailSize
   const height = thumbnailSize
@@ -45,22 +46,28 @@ export default async function (config) {
     .sort((a, b) => b.frontMatter.date_published
       .localeCompare(a.frontMatter.date_published)
     )
-    .map(({thumbnail, link, frontMatter}) => /*html*/`<article class="gallery-link">
+    .map(({thumbnail, link, frontMatter}) => /*html*/`<article class="blog-item window">
         <div class="image">
           <a href="${link}">
-            <img src="${thumbnail}" alt="${frontMatter.title}" width="128" />
+            <img src="${thumbnail}" alt="${frontMatter.title}" width="256" />
           </a>
         </div>
         <div class="card-body">
           <h3><a href="${link}">${frontMatter.title}</a></h3>
-          <p>${frontMatter.size || 'Unknown size'}, ${frontMatter.medium || 'unknown medum'}</p>
+          <p class="description"><a href="${link}">description: ${frontMatter.description || 'unknown medum'}</a></p>
+          <p class="tags">tags: ${frontMatter.tags}</p>
+          <p class="date">date: ${frontMatter.date_published}</p>
+          <p class="author">
+            <img class="author-avatar" src="${basePath}/images/${unwrapString(frontMatter.author_avatar)}" alt="" />
+            <span class="author-name">${frontMatter.author_name}</span>
+          </p>
         </div>
       </article>`)
   return basic({
     ...config,
     content: /* html */`
-      <div class="intro">${config.content}</div>
-      <div class="gallery-works">
+      <div class="intro window">${config.content}</div>
+      <div class="blog-list">
         ${galleryItems.join('\n')}
       </div>
   `

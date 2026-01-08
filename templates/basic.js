@@ -19,18 +19,15 @@ export default function (config) {
       <nav id="nav-bar">
         <ul id="nav-bar-items">
           <li><a href="${basePath}/about/">About</a></li>
-          <li><a href="${basePath}/learn/">Learn</a></li>
+          <li><a href="${basePath}/blog/">Blog</a></li>
           <li><a href="${basePath}/get-involved/">Get Involved</a></li>
-          <li><a href="${basePath}/nonprofit/">Nonprofit</a></li>
           <li><a href="${basePath}/contact/">Contact Us</a></li>
-          <li><a href="${basePath}/donate/" class="nav-donate">Donate ></a></li>
+          <li><a href="${basePath}/donate/" class="nav-donate">Donate &gt;</a></li>
         </ul>
       </nav>
     </header>
     <div class="container">
-      <div class="window">
-        ${content}
-      </div>
+      ${content}
     </div>
     <footer>
       <div id="footer-content">

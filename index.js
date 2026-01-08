@@ -4,11 +4,13 @@ import {
   readdir,
   rm,
   cp,
+  rename,
 } from 'node:fs/promises';
 import { join, sep, dirname } from 'node:path';
 import markdownit from 'markdown-it';
 import { readMarkdownWithFrontMatter } from './shared.js';
 
+const tempDir = 'temp';
 const outputDir = 'dist';
 const inputDir = 'content';
 const templateDir = 'templates';
@@ -34,12 +36,12 @@ const templateMap = templateFunctions.reduce((acc, [key, value]) => {
 }, {});
 
 const createPage = async (config) => {
-  const templateName = config.template || 'basic';
+  const templateName = config.template || (config.path.startsWith('blog') ? 'blog_item' : 'basic');
   const pageTemplate = templateMap[templateName];
   if (!pageTemplate) {
     throw new Error(`No template found named: "${templateName}"`);
   }
-  const prefixedPath = join(outputDir, config.path);
+  const prefixedPath = join(tempDir, config.path);
   const folderPath = dirname(prefixedPath);
   await mkdir(
     folderPath,
@@ -58,8 +60,8 @@ const createPage = async (config) => {
   writeFile(prefixedPath, output);
 };
 
-await rm(outputDir, { force: true, recursive: true });
-await cp(inputDir, outputDir, {
+await rm(tempDir, { force: true, recursive: true });
+await cp(inputDir, tempDir, {
   recursive: true,
   filter (source, _destination) {
     return !source.endsWith('.md');
@@ -89,4 +91,8 @@ const discoverPages = async (scanPath) => {
 };
 
 const pages = await discoverPages(inputDir);
-pages.forEach(createPage);
+await Promise.all(pages.map(createPage));
+
+// the ol' switcheroo
+await rm(outputDir, { force: true, recursive: true });
+await rename(tempDir, outputDir);
