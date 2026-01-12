@@ -17,8 +17,8 @@ export default function (config) {
           <input type="checkbox" id="nav-collapse-button" />
           <span id="nav-menu-icon"></span>
         </label>
-        <nav id="nav-bar">
-          <ul id="nav-bar-items">
+        <nav>
+          <ul>
             <li><a href="${basePath}/about/">About</a></li>
             <li><a href="${basePath}/blog/">Blog</a></li>
             <li><a href="${basePath}/get-involved/">Get Involved</a></li>
@@ -33,7 +33,7 @@ export default function (config) {
     </div>
     <footer>
       <div id="footer-content">
-        <div id="footer-nav-box socials">
+        <nav>
           <h3 class="special-alt-text">Social media links</h3>
           <ul id="svg-link-list">
             <li><a class="svg-footer-link" id="svg-discord" href="https://discord.gg/uRSthurdPY">discord</a></li>
@@ -42,33 +42,31 @@ export default function (config) {
             <li><a class="svg-footer-link" id="svg-youtube" href="https://www.youtube.com/c/801LabsSaltLakeCity">youtube</a></li>
             <li><a class="svg-footer-link" id="svg-github" href="https://github.com/801labs/">github</a></li>
           </ul>
-        </div>
+        </nav>
         <div id="footer-nav-box">
-          <div class="footer-content-block">
-            <h3><a class="footer-category-link" href="">ABOUT</a>
-            </h3><span>|</span>
-            <h3><a class="footer-category-link" href="">BLOG</a>
-            </h3><span>|</span>
-            <h3><a class="footer-category-link" href="">GET INVOLVED</a>
-            </h3><span>|</span>
-            <h3><a class="footer-category-link" href="">CONTACT US</a></h3>
-          </div>
-          <div class="footer-divider"></div>
-        <div id="footer-copy-block">
-          <p class="footer-copy-text">© 2024 801Labs.org. All rights reserved.</p>
-          <p class="footer-copy-text">
-            801 Labs hackerspace is a 501(c)(3) that is open to the public!
-          </p>
-          <p class="footer-copy-text">
-            353 East 200 South Suite #201, Salt Lake City, UT 84111
-          </p>
-          <p class="footer-copy-text bottom-links">
-            <a class="footer-link" href="#">Code of Conduct</a><span>|</span><a class="footer-link" href="#">Terms</a><span>|</span><a class="footer-link" href="#">Donate ></a>
+          <nav>
+            <a href="${basePath}/about/">ABOUT</a>
+            <span>|</span>
+            <a href="${basePath}/blog/">BLOG</a>
+            <span>|</span>
+            <a href="${basePath}/get-involved/">GET INVOLVED</a>
+            <span>|</span>
+            <a href="${basePath}/contact/">CONTACT US</a>
+          </nav>
+          <p>© 2024 801Labs.org. All rights reserved.</p>
+          <p>801 Labs hackerspace is a 501(c)(3) that is open to the public!</p>
+          <p>353 East 200 South Suite #201, Salt Lake City, UT 84111</p>
+          <p class="bottom-links">
+            <a href="${basePath}/code_of_conduct/">Code of Conduct</a>
+            <span>|</span>
+            <a href="${basePath}/terms/">Terms</a>
+            <span>|</span>
+            <a class="nav-donate" href="${basePath}/donate/">Donate</a>
           </p>
         </div>
       </div>
     </footer>
   </body>
 </html>
-`.trim();
+`.trim() + '\n';
 }
