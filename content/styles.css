@@ -336,6 +336,7 @@ a {
   transition-timing-function: ease-in-out;
 }
 
+a.active,
 a:hover,
 a:focus {
   color: var(--color-link-highlight);
@@ -344,6 +345,12 @@ a:focus {
 p {
   font-size: .85rem;
   padding: 0.5rem 0;
+}
+p.tags {
+  text-align: left;
+}
+p.tags a {
+  display: inline-block;
 }
 
 p:has(img) {

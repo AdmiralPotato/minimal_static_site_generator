@@ -37,9 +37,15 @@ export const readMarkdownWithFrontMatter = async (scanPath, path) => {
   };
 }
 
-
 const unwrapRegex = /^['"](.*)['"]$/;
 
 export const unwrapString = (string) => {
     return unwrapRegex.exec(string)[1];
 }
+
+export const stringToSlug = (s) => s
+  .toLocaleLowerCase()
+  .trim()
+  .replace(/[^\w\s-]/g, '')
+  .replace(/[\s_-]+/g, '-')
+  .replace(/^-+|-+$/g, '');

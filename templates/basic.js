@@ -1,6 +1,15 @@
 export default function (config) {
-  const { title, content, basePath } = config;
-  return /* html */ `
+  const {
+    title,
+    content,
+    basePath,
+    description,
+    derivedPages,
+  } = config;
+  return {
+    ...config,
+    derivedPages,
+    content: /* html */ `
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,6 +17,7 @@ export default function (config) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="${basePath}/styles.css" />
     <title>801 Labs: ${title}</title>
+${ description ? '    <meta name="description" content="' + description + '" />' : ''}
   </head>
   <body>
     <header>
@@ -68,5 +78,6 @@ export default function (config) {
     </footer>
   </body>
 </html>
-`.trim() + '\n';
-}
+`.trim() + '\n'
+  };
+};

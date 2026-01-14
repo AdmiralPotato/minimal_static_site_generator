@@ -1,6 +1,10 @@
 import { normalize, dirname } from 'node:path';
 import { readdir, writeFile } from 'node:fs/promises'
-import { readMarkdownWithFrontMatter, unwrapString } from '../shared.js'
+import {
+  readMarkdownWithFrontMatter,
+  unwrapString,
+  stringToSlug,
+} from '../shared.js'
 import basic from './basic.js'
 import { createCanvas, loadImage } from '@napi-rs/canvas'
 
@@ -16,11 +20,17 @@ export default async function (config) {
   const indexRegex = /([/\\])index.md$/
   const scanResult = (await readdir(inputPath, {
     recursive: true
-  })).filter(s => indexRegex.test(s))
-  const galleryItems = (
+  }).catch(() => [])).filter(s => indexRegex.test(s))
+  const tagToLink = (t) => `<a href="${basePath}/blog/tag/${stringToSlug(t)}/">${t}</a>`;
+  const tags = new Set();
+  const postTagMap = {};
+  const datePub = (p) => p.frontMatter.date_published;
+  const sortPostsChronologically = (a, b) => datePub(b).localeCompare(datePub(a));
+  const posts = (
     await Promise.all(scanResult.map(async item => {
       const {frontMatter} = await readMarkdownWithFrontMatter(inputPath, item)
-
+      const postTags = frontMatter.tags?.split(', ') || [];
+      const tagLinks = postTags.map((t)=>{tags.add(t); return t}).map(tagToLink);
       const link = normalize(`${item.replace(/index\.md$/, '')}`).replace(/\\/g, '/')
       const sourcePath = normalize(`${inputPrefix}${pathRoot}${link}${unwrapString(frontMatter.cover)}`)
       const canvas = createCanvas(width, height)
@@ -40,13 +50,7 @@ export default async function (config) {
       const thumbnailData = await canvas.encode('jpeg', 80)
       const thumbnail = `${link}thumbnail.jpg`
       await writeFile(`${outputPrefix}${pathRoot}${thumbnail}`, thumbnailData)
-      return {thumbnail, link, frontMatter}
-    }))
-  )
-    .sort((a, b) => b.frontMatter.date_published
-      .localeCompare(a.frontMatter.date_published)
-    )
-    .map(({thumbnail, link, frontMatter}) => /*html*/`<article class="blog-item window">
+      const content = /* html */ `<article class="blog-item window">
         <div class="image">
           <a href="${link}">
             <img src="${thumbnail}" alt="${frontMatter.title}" width="256" />
@@ -54,22 +58,73 @@ export default async function (config) {
         </div>
         <div class="card-body">
           <h3><a href="${link}">${frontMatter.title}</a></h3>
-          <p class="description"><a href="${link}">description: ${frontMatter.description || 'unknown medum'}</a></p>
-          <p class="tags">tags: ${frontMatter.tags}</p>
+          ${
+        frontMatter.description
+          ? '<p class="description"><a href="' + link + '">description: ' + frontMatter.description + '</a></p>'
+          : ''
+      }
+          ${
+        frontMatter.tags
+          ? '<p class="tags">tags: ' + tagLinks.join(', ') + '</p>'
+          : ''
+      }
           <p class="date">date: ${frontMatter.date_published.split('T')[0]}</p>
           <p class="author">
             <img class="author-avatar" src="${basePath}/images/${unwrapString(frontMatter.author_avatar)}" alt="" />
             <span class="author-name">${frontMatter.author_name}</span>
           </p>
         </div>
-      </article>`)
+      </article>`;
+      const page = { thumbnail, link, tagLinks, frontMatter, content };
+      postTags.forEach((t) => {
+        postTagMap[t] = postTagMap[t] || [];
+        postTagMap[t].push(page);
+        postTagMap[t].sort(sortPostsChronologically);
+      })
+      return page;
+    }))
+  )
+    .sort(sortPostsChronologically)
+    .map((page) => page.content);
+  const alphabeticalTags = Object.keys(postTagMap);
+  alphabeticalTags.sort((a, b) => a.localeCompare(b))
+  const derivedPages = await Promise.all(alphabeticalTags.map(async (tag) => {
+    const posts = postTagMap[tag].map((p) => p.content
+      .replaceAll('../blog/', '../../')
+      .replaceAll('"post/', '"../../post/')
+    );
+    const description = `Posts tagged: ${tag}`;
+    const tagToLink = (t) => `<a href="${basePath}/blog/tag/${stringToSlug(t)}/"${
+      t === tag ? ' class="active"' : ''
+    }>${t}</a>`;
+    const slug = stringToSlug(tag);
+    return {
+      ...config,
+      template: 'basic',
+      path: normalize(config.path.replace('index.html', '') + 'tag/' + slug + '/index.html'),
+      title: description,
+      description,
+      renderedContent: /* html */`
+      <div class="intro window">${config.content}
+        <hr />
+        <p>${description}</p>
+      </div>
+<!--  <div class="tags window"><pre>${[...tags.keys()].map(tagToLink).join('\n')}</pre></div>-->
+      <div class="blog-list">
+        ${posts.join('\n')}
+      </div>
+`,
+    };
+  }));
   return basic({
     ...config,
     content: /* html */`
       <div class="intro window">${config.content}</div>
+<!--  <div class="tags window"><pre>${[...tags.keys()].join('\n')}</pre></div> -->
       <div class="blog-list">
-        ${galleryItems.join('\n')}
+        ${posts.join('\n')}
       </div>
-  `
+`,
+    derivedPages,
   })
 }

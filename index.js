@@ -51,13 +51,17 @@ const createPage = async (config) => {
   );
   const depth = config.path.split(sep).length - 1;
   const basePath = depth === 0 ? '.' : new Array(depth).fill('..').join('/');
+  const content = config.renderedContent
+    ? config.renderedContent
+    : md.render(config.content);
   const templateConfig = {
     ...config,
-    content: md.render(config.content),
+    content,
     basePath,
   };
   const output = await pageTemplate(templateConfig, templateMap);
-  writeFile(prefixedPath, output);
+  writeFile(prefixedPath, output.content);
+  return output;
 };
 
 await rm(tempDir, { force: true, recursive: true });
@@ -91,7 +95,9 @@ const discoverPages = async (scanPath) => {
 };
 
 const pages = await discoverPages(inputDir);
-await Promise.all(pages.map(createPage));
+const primaryPages = await Promise.all(pages.map(createPage));
+const derivedPages = primaryPages.map((page) => page.derivedPages || []).flat(Infinity);
+await Promise.all(derivedPages.map(createPage));
 
 // the ol' switcheroo
 await rm(outputDir, { force: true, recursive: true });
