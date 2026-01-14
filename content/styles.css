@@ -895,11 +895,13 @@ input[type="checkbox"]:checked ~ .faq-toggle-icon {
   animation-name: cursor-highlight;
   animation-duration: 1.5s;
   animation-iteration-count: infinite;
+  letter-spacing: -6px;
+  margin-left: 6px;
 }
 
 @keyframes cursor-highlight {
   0%   {background-color: transparent;}
   49%  {background-color: transparent;}
-  50%  {background-color: var(--color-highlight-cursor);}
-  100% {background-color: var(--color-highlight-cursor);}
+  50%  {background-color: var(--color-box-background-semitransparent);}
+  100% {background-color: var(--color-box-background-semitransparent);}
 }
