@@ -10,6 +10,7 @@
   font-weight: inherit;
   text-align: inherit;
   box-sizing: border-box;
+  overflow-wrap: break-word;
 }
 
 :root {
@@ -99,6 +100,10 @@ body::before{
 .window + .window {
   margin-top: 2rem;
 }
+.window > * {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 @media (min-width: 500px) {
   .window {
     max-width: 960px;
@@ -144,11 +149,17 @@ body::before{
 
 .blog-item > .image {
   margin: auto;
+  padding: 0;
 }
 
 .blog-list .card-body {
   position: relative;
   flex-grow: 1;
+  padding: 0;
+}
+.blog-list .card-body > * {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 .blog-list .card-body::before {
   border-top: 2px solid var(--color-accent);
@@ -180,6 +191,7 @@ body .blog-list .card-body > * + * {
   top: 0;
   right: 0;
   left: 0;
+  width: auto;
   content: "";
   position: absolute;
 }
@@ -241,13 +253,11 @@ h1 {
   font-weight: 800;
   letter-spacing: .1rem;
   font-style: normal;
-  padding: 0.25rem 1rem;
 }
 
 h2 {
   font-size: 1.25rem;
   font-weight: 500;
-  padding: 0.25rem 1rem;
 }
 
 h3 {
@@ -257,22 +267,34 @@ h3 {
 h1+p,
 h2+p,
 h3+p,
+h4+p,
+h5+p,
+h6+p,
 p+h1,
 p+h2,
-p+h3 {
+p+h3,
+p+h4,
+p+h5,
+p+h6 {
   position: relative;
 }
 h1+p::before,
 h2+p::before,
 h3+p::before,
+h4+p::before,
+h5+p::before,
+h6+p::before,
 p+h1::before,
 p+h2::before,
-p+h3::before {
+p+h3::before,
+p+h4::before,
+p+h5::before,
+p+h6::before {
   content: "";
   display: block;
   position: relative;
-  left: 0;
-  right: 0;
+  left: -1rem;
+  width: calc(100% + 2rem);
   border-bottom: 2px solid var(--color-accent);
   opacity: var(--accent-opacity);
 }
@@ -299,6 +321,7 @@ h4,
 h5,
 h6 {
   line-height: 1.25em;
+  padding: 0.25rem 0;
 }
 
 
@@ -317,12 +340,15 @@ a:focus {
 
 p {
   font-size: .85rem;
-  padding: 0.5rem 1rem;
-  text-align: justify;
+  padding: 0.5rem 0;
 }
 
 p:has(img) {
   text-align: center;
+}
+
+ol, ul {
+  margin-left: 1.25rem;
 }
 
 @media (min-width: 520px) {
@@ -333,7 +359,11 @@ p:has(img) {
     font-size: 1.5rem;
   }
   p {
-    font-size: .9rem;
+    font-size: 1rem;
+    text-align: justify;
+  }
+  ol, ul {
+    margin-left: 2rem;
   }
 }
 
