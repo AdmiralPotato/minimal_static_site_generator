@@ -93,7 +93,7 @@ body::before{
   border: 2px solid var(--color-accent);
   border-left: calc(2rem + 2px) solid var(--color-accent);
   color: var(--color-text);
-  padding: calc(0.25rem + 2px);
+  padding: calc(.25rem + 2px);
   margin: auto;
 }
 .window + .window {
@@ -146,33 +146,36 @@ body::before{
   margin: auto;
 }
 
-
-@media (min-width: 600px) {
-  .blog-item {
-    flex-direction: row;
-  }
-}
-
 .blog-list .card-body {
   position: relative;
-  padding-left: 2px;
   flex-grow: 1;
 }
 .blog-list .card-body::before {
-  border-right: 2px solid var(--color-accent);
+  border-top: 2px solid var(--color-accent);
   opacity: var(--accent-opacity);
   left: 0;
   top: 0;
-  bottom: 0;
+  right: 0;
   content: "";
   position: absolute;
 }
+
+.blog-list .card-body h3 {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+}
+.blog-list .card-body a {
+  text-decoration: none;
+}
+.blog-list .card-body p {
+  font-size: 0.8rem;
+  line-height: 1.25rem;
+}
 body .blog-list .card-body > * + * {
   position: relative;
-  padding-top: 2px;
 }
-.blog-list .card-body > * + *::after {
-  border-top: 2px solid var(--color-accent);
+.blog-list .card-body > * + *::before {
+  border-bottom: 2px solid var(--color-accent);
   opacity: var(--accent-opacity);
   top: 0;
   right: 0;
@@ -192,6 +195,40 @@ body .blog-list .card-body > * + * {
 }
 .blog-list .card-body .author .author-name {
   padding: 0 0.5rem;
+}
+
+@media (min-width: 600px) {
+  .blog-item {
+    flex-direction: row;
+  }
+  .blog-list .card-body::before {
+    border-right: 2px solid var(--color-accent);
+    border-top: unset;
+    right: unset;
+    top: 0;
+    bottom: 0;
+  }
+  .blog-list .card-body h3 {
+    padding: 0.5rem 1rem;
+    font-size: 1.3rem;
+  }
+  .blog-list .card-body p {
+    font-size: .9rem;
+    line-height: 1.3rem;
+  }
+  .blog-list .card-body {
+    padding-left: 2px;
+  }
+}
+
+@media (min-width: 720px) {
+  .blog-list .card-body h3 {
+    font-size: 1.5rem;
+  }
+  .blog-list .card-body p {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
 }
 
 em {

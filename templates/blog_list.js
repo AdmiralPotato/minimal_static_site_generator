@@ -56,7 +56,7 @@ export default async function (config) {
           <h3><a href="${link}">${frontMatter.title}</a></h3>
           <p class="description"><a href="${link}">description: ${frontMatter.description || 'unknown medum'}</a></p>
           <p class="tags">tags: ${frontMatter.tags}</p>
-          <p class="date">date: ${frontMatter.date_published}</p>
+          <p class="date">date: ${frontMatter.date_published.split('T')[0]}</p>
           <p class="author">
             <img class="author-avatar" src="${basePath}/images/${unwrapString(frontMatter.author_avatar)}" alt="" />
             <span class="author-name">${frontMatter.author_name}</span>
