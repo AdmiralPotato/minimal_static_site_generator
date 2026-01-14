@@ -97,6 +97,9 @@ body::before{
   padding: calc(.25rem + 2px);
   margin: auto;
 }
+.window > p > img {
+  max-width: 100%;
+}
 .window + .window {
   margin-top: 2rem;
 }
