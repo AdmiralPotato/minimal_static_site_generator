@@ -384,6 +384,8 @@ pre:has(code) {
   white-space: pre-wrap;
   background-color: var(--color-box-background-transparent);
   padding: 1rem;
+  border-top: 2px solid var(--color-box-border-highlight);
+  border-bottom: 2px solid var(--color-box-border-highlight);
 }
 
 .special-alt-text {
