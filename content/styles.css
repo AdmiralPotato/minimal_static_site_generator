@@ -138,11 +138,21 @@ body::before{
 
 .blog-item {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
 }
-.blog-item .image {
+
+.blog-item > .image {
+  margin: auto;
 }
+
+
+@media (min-width: 600px) {
+  .blog-item {
+    flex-direction: row;
+  }
+}
+
 .blog-list .card-body {
   position: relative;
   padding-left: 2px;
@@ -190,15 +200,17 @@ em {
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 1.3rem;
   font-weight: 800;
   letter-spacing: .1rem;
   font-style: normal;
+  padding: 0.25rem 1rem;
 }
 
 h2 {
-  font-size: 2.25rem;
+  font-size: 1.25rem;
   font-weight: 500;
+  padding: 0.25rem 1rem;
 }
 
 h3 {
@@ -252,6 +264,7 @@ h6 {
   line-height: 1.25em;
 }
 
+
 a {
   color: var(--color-unclicked-link);
   text-underline-position: under;
@@ -266,12 +279,37 @@ a:focus {
 }
 
 p {
+  font-size: .85rem;
   padding: 0.5rem 1rem;
   text-align: justify;
 }
 
 p:has(img) {
   text-align: center;
+}
+
+@media (min-width: 520px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  p {
+    font-size: .9rem;
+  }
+}
+
+@media (min-width: 720px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  p {
+    font-size: 1rem;
+  }
 }
 
 pre:has(code) {
