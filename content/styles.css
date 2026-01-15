@@ -96,8 +96,9 @@ body::before{
   color: var(--color-text);
   padding: calc(.25rem + 2px);
   margin: auto;
+  max-width: 100%;
 }
-.window > p > img {
+img {
   max-width: 100%;
 }
 .window + .window {
@@ -107,7 +108,7 @@ body::before{
   padding-left: 1rem;
   padding-right: 1rem;
 }
-@media (min-width: 500px) {
+@media (min-width: 960px) {
   .window {
     max-width: 960px;
   }
@@ -154,17 +155,22 @@ body::before{
   margin: auto;
   padding: 0;
 }
+.blog-item > .image img {
+  max-width: unset;
+}
 
-.blog-list .card-body {
+
+.card-body {
   position: relative;
   flex-grow: 1;
   padding: 0;
 }
-.blog-list .card-body > * {
+.card-body > * {
   padding-left: 1rem;
   padding-right: 1rem;
 }
-.blog-list .card-body::before {
+.blog-item .window .card-body::after,
+.card-body::before {
   border-top: 2px solid var(--color-accent);
   opacity: var(--accent-opacity);
   left: 0;
@@ -173,22 +179,29 @@ body::before{
   content: "";
   position: absolute;
 }
+.blog-item .window .card-body::before {
+  display: none;
+}
+.blog-item .window .card-body::after {
+  top: unset;
+  bottom: unset;
+}
 
-.blog-list .card-body h3 {
+.card-body h3 {
   padding: 0.5rem 1rem;
   font-size: 1.25rem;
 }
-.blog-list .card-body a {
+.card-body a {
   text-decoration: none;
 }
-.blog-list .card-body p {
+.card-body p {
   font-size: 0.8rem;
   line-height: 1.25rem;
 }
-body .blog-list .card-body > * + * {
+body .card-body > * + * {
   position: relative;
 }
-.blog-list .card-body > * + *::before {
+.card-body > * + *::before {
   border-bottom: 2px solid var(--color-accent);
   opacity: var(--accent-opacity);
   top: 0;
@@ -198,17 +211,18 @@ body .blog-list .card-body > * + * {
   content: "";
   position: absolute;
 }
-.blog-list .card-body .author {
+.card-body .author {
   display: flex;
   flex-direction: row;
   padding: 0.5rem;
   line-height: 3rem;
 }
-.blog-list .card-body .author .author-avatar {
+.card-body .author .author-avatar {
   height: 3rem;
   border-radius: 50%;
+  aspect-ratio: 1;
 }
-.blog-list .card-body .author .author-name {
+.card-body .author .author-name {
   padding: 0 0.5rem;
 }
 
@@ -223,11 +237,11 @@ body .blog-list .card-body > * + * {
     top: 0;
     bottom: 0;
   }
-  .blog-list .card-body h3 {
+  .card-body h3 {
     padding: 0.5rem 1rem;
     font-size: 1.3rem;
   }
-  .blog-list .card-body p {
+  .card-body p {
     font-size: .9rem;
     line-height: 1.3rem;
   }
@@ -237,10 +251,10 @@ body .blog-list .card-body > * + * {
 }
 
 @media (min-width: 720px) {
-  .blog-list .card-body h3 {
+  .card-body h3 {
     font-size: 1.5rem;
   }
-  .blog-list .card-body p {
+  .card-body p {
     font-size: 1rem;
     line-height: 1.5rem;
   }
@@ -355,6 +369,9 @@ p.tags a {
 
 p:has(img) {
   text-align: center;
+}
+p.cover {
+  padding: 0;
 }
 
 ol, ul {

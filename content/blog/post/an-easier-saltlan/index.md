@@ -3,7 +3,7 @@ title: An easier SaltLAN
 slug: an-easier-saltlan
 date_published: 2018-11-28T03:20:06.000Z
 date_updated: 2018-11-28T03:20:55.000Z
-tags:
+tags: how to, tutorial, networking, gaming, Docker, Steam, DNS
 description: My family does an annual LAN Party and one of the biggest complaints we have is that Steam takes ages to download for everyone.
 cover: 'image-12.jpg'
 author_name: bashNinja

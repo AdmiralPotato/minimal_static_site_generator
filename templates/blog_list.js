@@ -31,8 +31,8 @@ export default async function (config) {
       const {frontMatter} = await readMarkdownWithFrontMatter(inputPath, item)
       const postTags = frontMatter.tags?.split(', ') || [];
       const tagLinks = postTags.map((t)=>{tags.add(t); return t}).map(tagToLink);
-      const link = normalize(`${item.replace(/index\.md$/, '')}`).replace(/\\/g, '/')
-      const sourcePath = normalize(`${inputPrefix}${pathRoot}${link}${unwrapString(frontMatter.cover)}`)
+      const linkRelative = normalize(`${item.replace(/index\.md$/, '')}`).replace(/\\/g, '/')
+      const sourcePath = normalize(`${inputPrefix}${pathRoot}${linkRelative}${unwrapString(frontMatter.cover)}`)
       const canvas = createCanvas(width, height)
       const ctx = canvas.getContext('2d')
       console.log('Generating thumbnail for:', sourcePath);
@@ -48,8 +48,10 @@ export default async function (config) {
         ctx.drawImage(image, 0, -offset, width, ratio * height)
       }
       const thumbnailData = await canvas.encode('jpeg', 80)
+      const thumbnailRelative = `${linkRelative}thumbnail.jpg`;
+      await writeFile(`${outputPrefix}${pathRoot}${thumbnailRelative}`, thumbnailData);
+      const link = basePath + '/blog/' + linkRelative;
       const thumbnail = `${link}thumbnail.jpg`
-      await writeFile(`${outputPrefix}${pathRoot}${thumbnail}`, thumbnailData)
       const content = /* html */ `<article class="blog-item window">
         <div class="image">
           <a href="${link}">
@@ -60,7 +62,7 @@ export default async function (config) {
           <h3><a href="${link}">${frontMatter.title}</a></h3>
           ${
         frontMatter.description
-          ? '<p class="description"><a href="' + link + '">description: ' + frontMatter.description + '</a></p>'
+          ? '<p class="description"><span>description: </span><a href="' + link + '">' + frontMatter.description + '</a></p>'
           : ''
       }
           ${
@@ -70,16 +72,18 @@ export default async function (config) {
       }
           <p class="date">date: ${frontMatter.date_published.split('T')[0]}</p>
           <p class="author">
+            <span class="author-name">author:</span>
             <img class="author-avatar" src="${basePath}/images/${unwrapString(frontMatter.author_avatar)}" alt="" />
             <span class="author-name">${frontMatter.author_name}</span>
           </p>
         </div>
       </article>`;
       const page = { thumbnail, link, tagLinks, frontMatter, content };
-      postTags.forEach((t) => {
-        postTagMap[t] = postTagMap[t] || [];
-        postTagMap[t].push(page);
-        postTagMap[t].sort(sortPostsChronologically);
+      postTags.forEach((tag) => {
+        const slug = stringToSlug(tag);
+        postTagMap[slug] = postTagMap[slug] || [];
+        postTagMap[slug].push(page);
+        postTagMap[slug].sort(sortPostsChronologically);
       })
       return page;
     }))
@@ -90,8 +94,7 @@ export default async function (config) {
   alphabeticalTags.sort((a, b) => a.localeCompare(b))
   const derivedPages = await Promise.all(alphabeticalTags.map(async (tag) => {
     const posts = postTagMap[tag].map((p) => p.content
-      .replaceAll('../blog/', '../../')
-      .replaceAll('"post/', '"../../post/')
+      .replaceAll(`"${basePath}`, `"../../${basePath}`)
     );
     const description = `Posts tagged: ${tag}`;
     const tagToLink = (t) => `<a href="${basePath}/blog/tag/${stringToSlug(t)}/"${

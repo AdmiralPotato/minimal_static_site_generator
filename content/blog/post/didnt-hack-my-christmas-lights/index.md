@@ -3,7 +3,7 @@ title: i didn't hack my christmas tree lights
 slug: i-didnt-hack-my-christmas-lights
 date_published: 2018-12-27T03:49:44.000Z
 date_updated: 2018-12-27T03:50:12.000Z
-tags:
+tags: research, networking, IOT
 description:
 cover: 'A7B65125-AF02-44C0-8FBF-0D2D0236161F-1.jpg'
 author_name: kimb3r
