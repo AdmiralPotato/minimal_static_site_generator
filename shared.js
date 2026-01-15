@@ -19,7 +19,7 @@ export const parseFrontMatter = (frontMatterString) => {
 
 export const readMarkdownWithFrontMatter = async (scanPath, path) => {
   const inputPath = normalize(join(scanPath, path));
-  const content = await readFile(inputPath, { encoding: 'utf8' });
+  const content = (await readFile(inputPath, { encoding: 'utf8' })).replaceAll('\r\n', '\n');
   // console.log('What is content?', content);
   const frontMatterRegex = /^---\n(.*?)\n---\n/s;
   const regexResult = frontMatterRegex.exec(content);
