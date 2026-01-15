@@ -714,166 +714,42 @@ footer a {
   z-index: -1;
 }
 
-.content.organization {
+.content {
   max-width: 960px;
   align-items: center;
   margin-left: auto;
   margin-right: auto;
 }
 
-.org-buttons {
-  display: flex;
-  flex-direction: column;
-  max-width: 960px;
-  margin-left: auto;
-  margin-right: auto;
-  align-items: center;
+.content p {
+  padding: 0;
 }
 
-.org-buttons > a {
-  border: 2px solid var(--color-box-border);
-  background-color: var(--color-box-background-transparent);
-  font-size: 1.25rem;
-  text-decoration: none;
-  min-width: 160px;
-  width: 50%;
-  max-width: 250px;
-  padding: 1rem 0;
-  margin: 1rem;
-  color:var(--color-text);
+.content h2::before {
+  content:">";
+  padding-right: 8px;
+  color: var(--color-accent);
+}
+.content h3::before {
+  content:">>";
+  padding-right: 8px;
+  color: var(--color-accent);
 }
 
-.org-buttons > a:hover,
-.org-buttons > a:focus {
-  border: 2px solid var(--color-box-border-highlight);
-  background-color: var(--color-box-background-semitransparent);
-  font-weight: 700;
-  color:var(--color-link-highlight);
-  text-shadow: #000 0 0 2px,#000 0 0 2px;
+.faq-block::before,
+.content::before {
+    content: "";
+    display: block;
+    position: relative;
+    left: -1rem;
+    width: calc(100% + 2rem);
+    border-bottom: 2px solid var(--color-accent);
+    opacity: var(--accent-opacity);
 }
 
 a.donate-button:hover,
 a.donate-button:focus {
   color:var(--color-accent);
-}
-
-@media (min-width: 600px) {
-  .org-buttons {
-    flex-direction: row;
-  }
-}
-
-@media (min-width: 860px) {
-  .org-buttons {
-    flex-direction: column;
-  }
-
-  .content.organization {
-    display: grid;
-    grid-template-areas: 
-    "title title"
-    "org-content org-buttons";
-  }
-
-  .content.organization h2 {
-    grid-area: title;
-  }
-
-  .org-content {
-    grid-area: org-content;
-  }
-
-  .org-buttons {
-    grid-area: org-buttons;
-  }
-}
-
-.question-block {
-  min-width: 280px;
-  width: 80%;
-  max-width: 720px;
-  margin: 2.5rem auto;
-  border: 2px solid var(--color-box-border);
-  border-radius: 2rem 2rem 0 0;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 3rem 1fr;
-  grid-template-areas: 
-  "faq-toggle faq-question"
-  "faq-answer faq-answer";
-}
-
-.faq-toggle {
-  grid-area: faq-toggle;
-  background-color: var(--color-faq-header);
-  display: flex;
-  align-items: center;
-}
-
-.faq-toggle input {
-  display: none;
-}
-
-.faq-toggle-icon {
-  background-image: url(images/caret_up.svg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 2rem;
-  height: 2rem;
-  margin: auto;
-}
-
-input[type="checkbox"]:checked ~ .faq-toggle-icon {
-  background-image: url(images/caret_down.svg);
-}
-.faq-question {
-
-  grid-area: faq-question;
-  background-color: var(--color-faq-header);
-}
-.faq-answer {
-  display: none;
-  padding: 1rem .5rem;
-  grid-area: faq-answer;
-  border-top: 1px solid var(--color-box-border-highlight);
-  background-color: var(--color-box-background-transparent);
-  list-style: inside url(images/arrow_right.svg);  
-}
-
-.faq-toggle:has(input[type="checkbox"]:checked) ~ .faq-answer {
-  display: block;
-}
-
-.faq-answer ul {
-  text-align: left;
-}
-.faq-answer ul li {
-  padding: 0.5rem 2rem;
-  text-indent: .3rem;
-}
-.post-faq-content {
-  background-image: url(images/dc801_background_dark.jpg);
-  background-size: cover;
-  background-position: top;
-}
-
-@media (min-width: 600px) {
-  .faq-question {
-    height: 3.5rem;
-    display: flex;
-    align-items: center;
-  }
-  .faq-answer {
-    padding: 2rem 2rem;
-  }
-}
-
-.content.resources p {
-  text-align: center;
-  font-size: 1.15rem;
-  line-height: 1.6rem;
-  padding: 2rem 0;
-  max-width: 57rem;
 }
 
 .equipment-tool-list-container {
