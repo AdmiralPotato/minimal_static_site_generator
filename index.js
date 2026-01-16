@@ -15,7 +15,9 @@ const outputDir = 'dist';
 const inputDir = 'content';
 const templateDir = 'templates';
 
-const md = markdownit();
+const md = markdownit({
+  html: true,
+});
 
 const templateFilenames = await readdir(templateDir, { recursive: true });
 const templateFunctions = await Promise.all(
