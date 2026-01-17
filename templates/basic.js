@@ -67,7 +67,7 @@ ${ description ? '    <meta name="description" content="' + description + '" />'
           <p>801 Labs hackerspace is a 501(c)(3) that is open to the public!</p>
           <p>353 East 200 South Suite #201, Salt Lake City, UT 84111</p>
           <p class="bottom-links">
-            <a href="${basePath}/code_of_conduct/">Code of Conduct</a>
+            <a href="${basePath}/code-of-conduct/">Code of Conduct</a>
             <span>|</span>
             <a href="${basePath}/terms/">Terms</a>
             <span>|</span>
