@@ -33,8 +33,8 @@
   --color-unclicked-link: #ffad43;
   --color-link-highlight: #e700e7;
   --color-highlight-cursor: #ffffff24;
-  --border-style: 2px solid var(--color-border);
   --grey-utility: #88888888;
+  --border-style: 2px solid var(--grey-utility);
 }
 
 html,
@@ -171,20 +171,18 @@ img {
   position: relative;
   flex-grow: 1;
   padding: 0;
+  border-top: var(--border-style);
+}
+.blog-item .window .card-body {
+  border-top: var(--border-style);
+  border-bottom: var(--border-style);
+}
+.card-body > *:first-child {
+  border: none;
 }
 .card-body > * {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-.card-body *:first-child,
-.card-body *:last-child {
-  border-top: none;
-  border-bottom: none;
-}
-
-.card-body h3 {
   padding: 0.5rem 1rem;
-  font-size: 1.25rem;
+  margin: 0;
 }
 .card-body a {
   text-decoration: none;
@@ -193,11 +191,8 @@ img {
   font-size: 0.8rem;
   line-height: 1.25rem;
 }
-body .card-body > * + * {
-  position: relative;
-}
-.card-body > * + * {
-  border-bottom: var(--border-style);
+.card-body > * {
+  border-top: var(--border-style);
 }
 .card-body .author {
   display: flex;
@@ -347,6 +342,7 @@ p:has(img) {
 }
 p.cover {
   padding: 0;
+  margin: 0;
 }
 p + p {
   margin-top: .5rem;
@@ -706,12 +702,12 @@ footer a {
 .content h2::before {
   content:">";
   padding-right: 8px;
-  color:var(--grey-utility)
+  color: var(--grey-utility);
 }
 .content h3::before {
   content:">>";
   padding-right: 8px;
-  color: var(--color-accent);
+  color: var(--grey-utility);
 }
 .faq-block,
 .content {
@@ -720,7 +716,7 @@ footer a {
 
 a.donate-button:hover,
 a.donate-button:focus {
-  color:var(--color-accent);
+  color: var(--color-accent);
 }
 
 .equipment-tool-list-container {
@@ -751,7 +747,7 @@ a.donate-button:focus {
 .tool-list li::before {
   content:">";
   padding-right: 4px;
-  color:var(--grey-utility)
+  color: var(--grey-utility)
 }
 
 @media (min-width: 720px) {

@@ -9,8 +9,8 @@ export default function (config) {
   const content = /* html */ `
 <article class="blog-item">
   <div class="window">
+    <h1>Blog: ${config.title}</h1>
     <div class="card-body">
-      <h3>Blog: ${config.title}</h3>
       ${
         config.description
           ? '<p class="description"><span>description:</span> ' + config.description + '</p>'

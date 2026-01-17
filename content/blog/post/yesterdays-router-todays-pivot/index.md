@@ -10,8 +10,6 @@ author_name: OakAtsume
 author_avatar: 'avatars/oak.jpg'
 ---
 
-# Yesterday's Router, Today's Pivot!
-
 **Residential Threat Hunting and the War on Automated Threats and Botnets** </br>
 *By: Oak Atsume* </br>
 
