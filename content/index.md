@@ -9,6 +9,13 @@ title: Home
 
 ----
 
+## Sodar shares his robots, Cindy and Torchy
+##### set_parking_lot_on_fire.sh
+<img src="images/sodar_holding_torchy_and_cindy.jpg" alt="Local hacker and suspected pyromaniac Sodar holding his shoebox sized battle bots named Torchy and Cindy." title="Local hacker and suspected pyromaniac Sodar holding his shoebox sized battle bots named Torchy and Cindy."> </img> 
+<img src="images/sodars_torchy_and_cindy_in_action.jpg" alt="The aforementioned Torchy and Cindy collaboring by spraying and igniting a flaming ball of aerosol in a parking lot at night." title="The aforementioned Torchy and Cindy collaboring by spraying and igniting a flaming ball of aerosol in a parking lot at night."> </img> 
+
+----
+
 ## What will I learn at 801 Labs?
 
 801 Labs runs a wide variety of classes that cover topics ranging from designing and building electronics, to information security, to programming, to 3D printing and 3D modeling, and more. Since we are a community run organization, our class offerings are based on what members of the local community are proficient in and willing to teach. The best way to find out exactly what you can learn is to check out our upcoming events. If you’ve got something you want to teach or would like to learn about, you can check out the get involved section and let us know you’d like to teach a class, or to let us know there is interest in a topic so that we can try to organize a class to cover that topic.
