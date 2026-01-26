@@ -25,6 +25,7 @@ I believe the residential space deserves more attention. That’s where real peo
 Since I started running a honeypot in a residential network, one thing became clear: **we're under constant attack!** 
 
 Governments like to point fingers at China, Russia, North Korea. But in reality, it's often more mundane. The biggest threat to our digital lives may not be a foreign nation, but instead **the negligence of vendors and users alike!**
+
 ![Attack Map](country-map.png)
 
 ## Who's Knocking, and What are they doing??
@@ -130,8 +131,6 @@ Over the weeks I’ve been running this honeypot, a clear pattern has emerged:
 3. It spreads rapidly, monetizing devices along the way
 
 It happens fast. In days. The ecosystem is efficient, ruthless, and almost entirely unsupervised.
-
----
 
 ## Final Thoughts
 

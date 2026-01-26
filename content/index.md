@@ -11,8 +11,31 @@ title: Home
 
 ## Sodar shares his robots, Cindy and Torchy
 ##### set_parking_lot_on_fire.sh
-<img src="images/sodar_holding_torchy_and_cindy.jpg" alt="Local hacker and suspected pyromaniac Sodar holding his shoebox sized battle bots named Torchy and Cindy." title="Local hacker and suspected pyromaniac Sodar holding his shoebox sized battle bots named Torchy and Cindy."> </img> 
-<img src="images/sodars_torchy_and_cindy_in_action.jpg" alt="The aforementioned Torchy and Cindy collaboring by spraying and igniting a flaming ball of aerosol in a parking lot at night." title="The aforementioned Torchy and Cindy collaboring by spraying and igniting a flaming ball of aerosol in a parking lot at night."> </img> 
+
+<div class="home-highlight">
+<img src="images/sodar_holding_torchy_and_cindy.jpg" alt="Local hacker and suspected pyromaniac Sodar holding his shoebox sized battle bots named Torchy and Cindy." title="Local hacker and suspected pyromaniac Sodar holding his shoebox sized battle bots named Torchy and Cindy.">
+<img src="images/sodars_torchy_and_cindy_in_action.jpg" alt="The aforementioned Torchy and Cindy collaborating by spraying and igniting a flaming ball of aerosol in a parking lot at night." title="The aforementioned Torchy and Cindy collaborating by spraying and igniting a flaming ball of aerosol in a parking lot at night.">
+</div>
+<style>
+.home-highlight {
+  border-top: var(--border-style);
+  display: flex;
+  flex-direction: column;
+  padding: 0 !important;
+}
+.home-highlight > img {
+  width: 100%;
+  display: block;
+}
+@media (min-width: 720px) {
+  .home-highlight {
+    flex-direction: row;
+  }
+  .home-highlight > img {
+    width: 50%;
+  }
+}
+</style>
 
 ----
 
@@ -24,8 +47,6 @@ title: Home
 
 ## Upcoming Events
 
-<hr style="padding: 0; margin: 0;" />
-
-<div style="padding: 0;">
+<div style="padding: 0 !important;">
 <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FDenver&showPrint=0&src=Y190a2Q1NjhrcGZtZmRudXM5ZnJ2c3Y1ZmZzMEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%2333b679" style="filter: invert(1) hue-rotate(240deg); border: none; width: 100%; margin: 0 auto;" height="600" frameborder="0" scrolling="no"></iframe>
 </div>
