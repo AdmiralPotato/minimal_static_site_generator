@@ -274,18 +274,18 @@ h3 {
   font-size: 1.15rem;
   font-weight: 500;
 }
-h1+*,
-h2+*,
-h3+*,
-h4+*,
-h5+*,
-h6+*,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+.window > h1+*,
+.window > h2+*,
+.window > h3+*,
+.window > h4+*,
+.window > h5+*,
+.window > h6+*,
+.window > h1,
+.window > h2,
+.window > h3,
+.window > h4,
+.window > h5,
+.window > h6 {
   border-top: var(--border-style);
 }
 .window > h1+*,
