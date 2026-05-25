@@ -84,8 +84,8 @@ ${ description ? '    <meta name="description" content="' + description + '" /><
           <ul>
             <li><a href="${basePath}/about/">About</a></li>
             <li><a href="${basePath}/blog/">Blog</a></li>
-            <li><a href="${basePath}/get-involved/">Get Involved</a></li>
-            <li><a href="${basePath}/contact/">Contact Us</a></li>
+            <li><a href="${basePath}/get-involved/">Get_Involved</a></li>
+            <li><a href="${basePath}/contact/">Contact_Us</a></li>
             <li><a href="${basePath}/donate/" class="nav-donate">Donate &gt;</a></li>
           </ul>
         </nav>
@@ -112,9 +112,9 @@ ${ description ? '    <meta name="description" content="' + description + '" /><
             <span>|</span>
             <a href="${basePath}/blog/">BLOG</a>
             <span>|</span>
-            <a href="${basePath}/get-involved/">GET INVOLVED</a>
+            <a href="${basePath}/get-involved/">GET_INVOLVED</a>
             <span>|</span>
-            <a href="${basePath}/contact/">CONTACT US</a>
+            <a href="${basePath}/contact/">CONTACT_US</a>
           </nav>
           <p>© 2024 801Labs.org. All rights reserved.</p>
           <p>801 Labs hackerspace is a 501(c)(3) that is open to the public!</p>
