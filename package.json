@@ -4,22 +4,22 @@
   "description": "You know what? Fuck all the normal build toolchains. This will be BETTER.",
   "main": "index.js",
   "type": "module",
-  "scripts": {
-    "build": "node index.ts",
-    "check": "tsc --noEmit"
-  },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@napi-rs/canvas": "^0.1.69",
     "markdown-it": "^14.1.0"
-  },
-  "engines": {
-    "node": ">=22.18.0"
   },
   "devDependencies": {
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^25.6.0",
     "typescript": "^6.0.3"
-  }
+  },
+  "scripts": {
+    "build": "node index.ts",
+    "check": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "author": "801Labs Community",
+  "license": "MIT"
 }
